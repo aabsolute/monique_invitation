@@ -23,16 +23,17 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
-	//implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	//implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 	implementation 'org.springframework.session:spring-session-jdbc'
 	implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.3.8'
 	implementation 'junit:junit:4.13.1'
+	implementation 'net.rakugakibox.util:yaml-resource-bundle:1.1'
 	//implementation 'org.springframework.boot:spring-boot-starter-security'
 	//implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
-
+	//implementation 'com.maxmind.geoip2:geoip2:2.3.1' // client ip info
 	compileOnly 'org.projectlombok:lombok:1.18.16'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'

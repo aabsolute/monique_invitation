@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:fragment="main-html-head(title)">
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+        <link rel="stylesheet" type="text/css" th:href="@{/css/main/style.css}">
+
+        <title th:text="${#messages.msg(${title})}">title</title>
+    </th:block>
+</head>
+
+<body>
+    <!-- header-->
+    <header th:fragment="main-header">
+        <div class="header-area">
+            <div id="sticky-header" class="main-header-area">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-xl-3 col-lg-3">
+                            <div class="logo-img">
+                                <a href="index.html">
+                                    <img src="img/logo.png" alt="">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xl-9 col-lg-9">
+                            <div class="main-menu  d-none d-lg-block">
+                                <nav>
+                                    <ul id="navigation">
+                                        <li><a class="active" href="index.html">home</a></li>
+                                        <li><a href="story.html">Our Story</a></li>
+                                        <li><a href="Gallery.html">Gallery</a></li>
+                                        <li><a href="#">Blog <i class="ti-angle-down"></i></a>
+                                            <ul class="submenu">
+                                                <li><a href="blog.html">blog</a></li>
+                                                <li><a href="single-blog.html">single-blog</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="contact.html">Contact</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="mobile_menu d-block d-lg-none"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!--/ header-->
+
+    <!-- slider_area -->
+    <div class="slider_area ">
+        <div class="slider_area_inner slider_bg_1 overlay2">
+            <div class="slider_text text-center">
+                <div class="text_inner">
+                    <img src="img/banner/ornaments.png" alt="">
+                    <h4>14 Jan 2020</h4>
+                    <h3>Anjelina & Jack <br> Wedding Ceremony</h3>
+                    <span>Get Married</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/ slider_area -->
+
+    <!-- wedding_countdown -->
+    <div class="weeding_countdown_area">
+        <div class="flowaers_top d-none d-lg-block">
+            <img src="img/banner/flower-top.png" alt="">
+        </div>
+        <div class="flowaers_bottom d-none d-lg-block">
+            <img src="img/banner/flower-bottom.png" alt="">
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="section_title text-center">
+                        <img src="img/banner/flowers.png" alt="">
+                        <span>14. January. 2020</span>
+                        <h3>THE. WEDDING. Countdown</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-12">
+                    <div id="clock" class="countdown_area counter_bg ">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/ wedding_countdown -->
+
+    <!-- program_details -->
+    <div class="program_details_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="section_title text-center">
+                        <img src="img/banner/flowers.png" alt="">
+                        <h3>Program. Details</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-4 col-lg-4">
+                    <div class="single_program program_bg_1 text-center">
+                        <div class="program_inner ">
+                            <span>
+                                16.00
+                            </span>
+                            <h3>Wedding Ceremony</h3>
+                            <p>Many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some content of a page when looking at its layout. </p>
+                            <img src="img/program_details/ornaments.png" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4">
+                    <div class="single_program program_bg_2 text-center">
+                        <div class="program_inner ">
+                            <span>
+                                20.00
+                            </span>
+                            <h3>Lunch Time</h3>
+                            <p>Many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some content of a page when looking at its layout. </p>
+                            <img src="img/program_details/ornaments.png" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4">
+                    <div class="single_program program_bg_3 text-center">
+                        <div class="program_inner ">
+                            <span>
+                                22.00
+                            </span>
+                            <h3>WeParty Time</h3>
+                            <p>Many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some content of a page when looking at its layout. </p>
+                            <img src="img/program_details/ornaments.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/ program_details -->
+
+
+
+    <th:block th:fragment="main-footer">
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    </th:block>
+
+</body>
+
+</html>
