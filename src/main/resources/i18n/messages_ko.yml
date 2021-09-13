@@ -1,2 +1,27 @@
-main:
-  title: "곽 & 나나"
+label:
+  main:
+    list:
+      home: Home
+      ourstory: Our Stroy
+      gallery: Gallery
+      blog: Blog
+      login: login
+      admin: Admin
+      sign-in: Sign-In
+      sign-up: Sign-Up
+html:
+  title: have a nice day
+
+slider-aria: 
+  head: Wedding Ceremony
+  name: 곽성환&사이토나나
+  foot: 우리 결혼 했어요
+
+our-story: 
+  major:
+    heading:  우리.사랑.이야기
+  who:
+    groom: 신랑
+    name: 곽성환
+    Introduce: Many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution
+                                of letters, as opposed to using Content here content here, making it look like readable English. Many desktop publishing packages and web page editors now use.

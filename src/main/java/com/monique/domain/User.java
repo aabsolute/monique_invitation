@@ -15,14 +15,14 @@ public class User extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Column(length = 32, nullable = false, unique=true)
+    private String email;
+
     @Column(length = 32, nullable = false)
     private String userName;
 
     @Column(length = 128, nullable = false)
     private String password;
-
-    @Column(length = 32, nullable = false)
-    private String email;
 
     @Column(length = 128, nullable = false)
     private String photo;
