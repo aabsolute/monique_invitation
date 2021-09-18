@@ -39,3 +39,5 @@ out/
 
 ### Customize ###
 application-database.yml
+*.png
+*.jpg

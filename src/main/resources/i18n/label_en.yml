@@ -1,0 +1,52 @@
+label:
+  main:
+    list:
+      home: Home
+      ourstory: Our Stroy
+      gallery: Gallery
+      blog: Blog
+      login: login
+      admin: Admin
+      sign-in: Sign-In
+      sign-up: Sign-Up
+html:
+  title: have a nice day
+
+slider-aria:
+  head: Wedding Ceremony
+  name: kwak
+  foot: 結婚しました。
+
+our-story:
+  major:
+    heading:  私たち.愛.話
+  who:
+    groom: 男
+    name: 郭成煥
+    Introduce: Many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution
+      of letters, as opposed to using Content here content here, making it look like readable English. Many desktop publishing packages and web page editors now use.
+  content:
+    first-head: 初めの
+    first-sentence: 会ったとき
+    second-head: 韓国と日本で
+    second-sentence: 韓国と日本では
+    third-head: 日本で
+    third-sentence: 日本では
+
+  sign-up:
+    major:
+      title: title
+
+  sign-up:
+    major:
+      title: title
+  
+  language: 
+    notice:  
+      korean: 한국어를 선택합니다.
+      japanese: 日本語を選択します。
+      english: Select English
+    select: 
+      korean: 한국어
+      japanese: 日本語
+      english: English

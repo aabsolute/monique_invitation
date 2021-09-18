@@ -2,15 +2,26 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <th:block th:fragment="main-html-head(title)">
+    <th:block th:fragment="main-html-head">
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+        <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
         <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css">
+        <link th:href="@{/css/main/owl.carousel.min.css}" rel="stylesheet" />
+        <link th:href="@{/css/main/magnific-popup.css}" rel="stylesheet" />
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+        <link th:href="@{/css/main/themify-icons.css}" rel="stylesheet" />
+        <link th:href="@{/css/main/nice-select.css}" rel="stylesheet" />
+        <link th:href="@{/css/main/flaticon.css}" rel="stylesheet" />
+        <link th:href="@{/css/main/gijgo.css}" rel="stylesheet" />
+        <link th:href="@{/css/main/slicknav.css}" rel="stylesheet" />
         <link th:href="@{/css/main/style.css}" rel="stylesheet" />
+
         <!-- <title th:text="${#messages.msg(${title})}">title</title> -->
         <title>title</title>
     </th:block>
@@ -18,7 +29,7 @@
 
 <body>
     <!-- header-->
-    <header th:fragment="main-header">
+    <header th:fragment="main-header(menu)">
         <div class="header-area">
             <div id="sticky-header" class="main-header-area">
                 <div class="container">
@@ -38,16 +49,16 @@
 
                                         </li>
                                         <li>
-                                            <a class="active" th:href="@{/}" th:text="#{label.main.list.home}"></a>
+                                            <a th:classappend="${menu} == 'main' ? 'active'" th:href="@{/}" th:text="#{label.main.list.home}"></a>
                                         </li>
                                         <li>
-                                            <a th:href="@{/our-story}" th:text="#{label.main.list.ourstory}"></a>
+                                            <a th:classappend="${menu} == 'our-story' ? 'active'" th:href="@{/our-story}" th:text="#{label.main.list.ourstory}"></a>
                                         </li>
                                         <li>
-                                            <a th:href="@{/gallery}" th:text="#{label.main.list.gallery}"></a>
+                                            <a th:classappend="${menu} == 'gallery' ? 'active'" th:href="@{/gallery}" th:text="#{label.main.list.gallery}"></a>
                                         </li>
                                         <li>
-                                            <a th:href="@{/blog}" th:text="#{label.main.list.blog}"></a>
+                                            <a th:classappend="${menu} == 'blog' ? 'active'" th:href="@{/blog}" th:text="#{label.main.list.blog}"></a>
                                         </li>
                                         <li>
                                             <a href="#" th:text="#{label.main.list.login}">
@@ -61,9 +72,9 @@
                                                 </li>
                                             </ul>
                                         </li>
-                                        <th:block th:if="${session.userSession.role.name} eq 'ADMIN'">
+                                        <th:block th:if="${session.userSession} != null and ${session.userSession.role.name} eq 'ADMIN'">
                                             <li>
-                                                <a th:href="@{/admin}" th:text="#{label.main.list.admin}"></a>
+                                                <a th:classappend="${menu} == 'admin' ? 'active'" th:href="@{/admin}" th:text="#{label.main.list.admin}"></a>
                                             </li>
                                         </th:block>
                                     </ul>
@@ -85,10 +96,12 @@
             <div class="slider_area_inner slider_bg_1 overlay2">
                 <div class="slider_text text-center">
                     <div class="text_inner">
+                        <img th:src="@{/image/banner/ornaments.png}">
 
-                        <img th:src="@{/imgage/banner/ornaments.png}">
-                        <td th:text="${#temporals}"></td>
-                        <h4 th:text="${weddingDate.createDate(user.crtDtm, 'yyyy MM dd')}">14 Jan 2022</h4>
+                        <th:block th:with="str_weddingDate = ${@environment.getProperty('wedding.date')}">
+                            <h4 th:text="${#temporals.createDate(str_weddingDate, 'yyyyMMdd')}"></h4>
+                        </th:block>
+
                         <h3 th:text="#{slider-aria.name}">Anjelina & Jack <br> <span th:text="#{slider-aria.head}">Wedding Ceremony</span></h3>
                         <span th:text="#{slider-aria.foot}">Get Married</span>
                     </div>
@@ -102,16 +115,16 @@
         <!-- wedding_countdown -->
         <div class="weeding_countdown_area">
             <div class="flowaers_top d-none d-lg-block">
-                <img th:src="@{/imgage/banner/flower-top.png}">
+                <img th:src="@{/image/banner/flower-top.png}">
             </div>
             <div class="flowaers_bottom d-none d-lg-block">
-                <img th:src="@{/imgage/banner/flower-bottom.png}">
+                <img th:src="@{/image/banner/flower-bottom.png}">
             </div>
             <div class="container">
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="section_title text-center">
-                            <img th:src="@{/imgage/banner/flowers.png}">
+                            <img th:src="@{/image/banner/flowers.png}">
                             <span>14. January. 2020</span>
                             <h3>THE. WEDDING. Countdown</h3>
                         </div>
@@ -135,7 +148,7 @@
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="section_title text-center">
-                            <img th:src="@{/imgage/banner/flowers.png}">
+                            <img th:src="@{/image/banner/flowers.png}">
                             <h3 th:text="#{our-story.major.heading}">Our. Love. Story</h3>
                         </div>
                     </div>
@@ -146,9 +159,9 @@
                             <div class="story_thumb">
                                 <img src="img/story/1.png" alt="">
                             </div>
-                            <span th:text="our-story.who.groom">Groom</span>
-                            <h3 th:text="our-story.who.name">ss</h3>
-                            <p th:text="our-story.who.Introduce"></p>
+                            <span th:text="#{our-story.who.groom}">Groom</span>
+                            <h3 th:text="#{our-story.who.name}">ss</h3>
+                            <p th:text="#{our-story.who.Introduce}"></p>
                             <div class="social_links">
                                 <ul>
                                     <li>
@@ -167,16 +180,16 @@
                     <div class="col-xl-4 col-md-6 col-lg-4">
                         <div class="weding_time_line text-center">
                             <div class="single_time_line">
-                                <h3>Fast Meet</h3>
-                                <p>Many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some.</p>
+                                <h3 th:text="#{first-head}">first meet</h3>
+                                <p th:text="#{first-sentence}">Many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some.</p>
                             </div>
                             <div class="single_time_line">
-                                <h3>He Proposed</h3>
-                                <p>Many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some.</p>
+                                <h3 th:text="#{second-head}">He Proposed</h3>
+                                <p th:text="#{second-sentence}">Many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some.</p>
                             </div>
                             <div class="single_time_line">
-                                <h3>Love Story</h3>
-                                <p>Many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some.</p>
+                                <h3 th:text="#{third-head}">Love Story</h3>
+                                <p th:text="#{third-sentence}">Many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some.</p>
                             </div>
                             <div class="single_time_line">
                                 <h3>Wedding Day</h3>
@@ -328,11 +341,30 @@
 
     <th:block th:fragment="main-footer">
         <!-- Optional JavaScript -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script type="text/javascript" th:src="@{/js/main/modernizr-3.5.0.min.js}"></script>
+
+
+
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+        <script type="text/javascript" th:src="@{/js/main/owl.carousel.min.js}"></script>
+        <script type="text/javascript" th:src="@{/js/main/isotope.pkgd.min.js}"></script>
+        <script type="text/javascript" th:src="@{/js/main/ajax-form.js}"></script>
+        <script type="text/javascript" th:src="@{/js/main/waypoints.min.js}"></script>
+        <script type="text/javascript" th:src="@{/js/main/jquery.counterup.min.js}"></script>
+        <script type="text/javascript" th:src="@{/js/main/imagesloaded.pkgd.min.js}"></script>
+        <script type="text/javascript" th:src="@{/js/main/scrollIt.js}"></script>
+        <script type="text/javascript" th:src="@{/js/main/jquery.scrollUp.min.js}"></script>
+        <script type="text/javascript" th:src="@{/js/main/wow.min.js}"></script>
+        <script type="text/javascript" th:src="@{/js/main/nice-select.min.js}"></script>
+        <script type="text/javascript" th:src="@{/js/main/gijgo.min.js}"></script>
+        <script type="text/javascript" th:src="@{/js/main/jquery.countdown.min.js}"></script>
+        <script type="text/javascript" th:src="@{/js/main/jquery.slicknav.min.js}"></script>
+        <script type="text/javascript" th:src="@{/js/main/jquery.magnific-popup.min.js}"></script>
+        <script type="text/javascript" th:src="@{/js/main/plugins.js}"></script>
         <script type="text/javascript" th:src="@{/js/main/main.js}"></script>
+
+
     </th:block>
 
 </body>

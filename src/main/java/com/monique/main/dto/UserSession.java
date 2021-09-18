@@ -25,5 +25,9 @@ public class UserSession implements Serializable{
 
     private LangType language;
 
+    public void logInAndSetEmail(String userEmail){
+        this.email = userEmail;
+    }
+
 
 }
