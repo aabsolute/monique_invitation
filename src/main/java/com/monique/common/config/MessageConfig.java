@@ -65,7 +65,6 @@ public class MessageConfig implements WebMvcConfigurer {
                 this.basefilenames = new String[0];
 
             }
-            ms.setBasename(basefilenames[0]);
             ms.setDefaultEncoding(encoding);
             ms.setAlwaysUseMessageFormat(true);
             ms.setUseCodeAsDefaultMessage(true);
