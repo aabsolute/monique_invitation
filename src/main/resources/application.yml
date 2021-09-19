@@ -50,5 +50,5 @@ spring:
       cache: false
 
   messages:
-    basename: i18n/messages, i18n/label
+    basename: i18n/messages
     encoding: UTF-8

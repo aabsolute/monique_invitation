@@ -18,9 +18,18 @@
         <script>
             $(document).ready(function() {
                 alert("First READY");
+
+                var popupWidth = 200;
+                var popupHeight = 300;
+
+                var popupX = (window.screen.width / 2) - (popupWidth / 2);
+
+                var popupY = (window.screen.height / 2) - (popupHeight / 2);
+
+
                 var url = "/language-popup";
                 var name = "popup test";
-                var option = "width = 500, height = 500, top = 100, left = 200, location = no"
+                var option = "width =" + popupWidth + ", height =" + popupHeight + ", top =" + popupY + ", left = " + popupX + ", status = no"
                 window.open(url, name, option);
 
             });

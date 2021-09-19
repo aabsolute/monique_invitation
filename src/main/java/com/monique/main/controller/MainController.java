@@ -11,8 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
@@ -34,7 +33,7 @@ public class MainController {
 
     @GetMapping("/")
     public String getMain(Model model, HttpServletRequest request, HttpServletResponse response,
-                          @CookieValue(value = "MONIQUE-LANG", required = false) String moniqueLang) {
+                          @CookieValue(value = "MONIQUE-LANG", required = false) String moniqueLang, @RequestParam(name = "lang", required = false) String paramLang) {
 
         //            user = UserSession.builder().email("").role(RoleType.ADMIN).language(LangType.JP).build();
 
@@ -42,10 +41,14 @@ public class MainController {
         if (moniqueLang != null && !moniqueLang.isEmpty()) {
             cookieLang = moniqueLang;
         }
+        if(paramLang != null && !paramLang.isEmpty()){
+            createLanguageCookie2(paramLang, response);
+            cookieLang = paramLang;
+        }
 
         log.debug(messageSource.getMessage("our-story.major.heading", null, Locale.KOREAN));
 
-        model.addAttribute("cookieLang", moniqueLang);
+        model.addAttribute("cookieLang", cookieLang);
         return "main";
     }
 
@@ -75,4 +78,25 @@ public class MainController {
         log.info("authorPopGET.......");
         return "/pop-up/language-popup";
     }
+
+    @PostMapping("/createCooKie")
+    @ResponseBody()
+    public String createLanguageCookie(@RequestParam(name = "lang") String language, HttpServletResponse response){
+
+        Cookie myCookie = new Cookie("MONIQUE-LANG", language.toLowerCase());
+        myCookie.setMaxAge(0);
+        myCookie.setPath("/"); // 모든 경로에서 접근 가능 하도록 설정
+        response.addCookie(myCookie);
+
+        return language;
+    }
+
+    private void createLanguageCookie2(String language, HttpServletResponse response)
+    {
+        Cookie myCookie = new Cookie("MONIQUE-LANG", language.toLowerCase());
+        myCookie.setMaxAge(0);
+        myCookie.setPath("/"); // 모든 경로에서 접근 가능 하도록 설정
+        response.addCookie(myCookie);
+    }
+
 }

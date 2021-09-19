@@ -1,5 +1,6 @@
 package com.monique.common.config;
 
+import lombok.extern.slf4j.Slf4j;
 import net.rakugakibox.util.YamlResourceBundle;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
@@ -12,11 +13,13 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
+@Slf4j
 @Configuration
 public class MessageConfig implements WebMvcConfigurer {
 
@@ -27,13 +30,13 @@ public class MessageConfig implements WebMvcConfigurer {
         private String encoding;
 
         @Bean
-        public CookieLocaleResolver localeResolver() {
-            CookieLocaleResolver localeResolver = new CookieLocaleResolver();
-            localeResolver.setDefaultLocale(Locale.KOREAN);
-            localeResolver.setCookieName("MONIQUE-LANG");
-            localeResolver.setCookieMaxAge(0);
-            localeResolver.setCookiePath("/");
-            return localeResolver;
+        public SessionLocaleResolver localeResolver() {
+//            CookieLocaleResolver localeResolver = new CookieLocaleResolver();
+//            localeResolver.setDefaultLocale(Locale.KOREAN);
+//            localeResolver.setCookieName("MONIQUE-LANG");
+//            localeResolver.setCookieMaxAge(0);
+//            localeResolver.setCookiePath("/");
+            return new SessionLocaleResolver();
         }
 
         @Bean
@@ -60,8 +63,9 @@ public class MessageConfig implements WebMvcConfigurer {
                 ms.setBasenames(basefilenames);
             } else {
                 this.basefilenames = new String[0];
-                ms.setBasename(basefilenames[0]);
+
             }
+            ms.setBasename(basefilenames[0]);
             ms.setDefaultEncoding(encoding);
             ms.setAlwaysUseMessageFormat(true);
             ms.setUseCodeAsDefaultMessage(true);
