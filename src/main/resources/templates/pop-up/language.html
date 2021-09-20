@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Document</title>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css">
+</head>
+
+<body>
+    <!-- <button id="ko" type="button" class="btn btn-secondary btn-lg btn-block" th:text="@{label.language.notice.korean}" th:onclick="|location.href='@{/(lang=ko)}'|">Block level button</button>
+    <button id="ja" type="button" class="btn btn-secondary btn-lg btn-block" th:text="@{label.language.notice.japanese}" th:onclick="|location.href='@{/(lang=ja)}'|">Block level button</button>
+    <button id="en" type="button" class="btn btn-secondary btn-lg btn-block" th:text="@{label.language.notice.english}" th:onclick="|location.href='@{/(lang=en)}'|">Block level button</button> -->
+
+    <container>
+        <button id="ko" type="button" class="btn btn-secondary btn-lg btn-block" th:text="@{label.language.notice.korean}" onClick="gomainWithLanguage(this.id)">Block level button</button>
+        <button id="ja" type="button" class="btn btn-secondary btn-lg btn-block" th:text="@{label.language.notice.japanese}" onClick="gomainWithLanguage(this.id)">Block level button</button>
+        <button id="en" type="button" class="btn btn-secondary btn-lg btn-block" th:text="@{label.language.notice.english}" onClick="gomainWithLanguage(this.id)">Block level button</button> -->
+
+    </container>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            var strWidth = $('#container').outerWidth() + (window.outerWidth - window.innerWidth);
+            var strHeight = $('#container').outerHeight() + (window.outerHeight - window.innerHeight);
+            //resize 
+            window.resizeTo(strWidth, strHeight);
+        });
+
+        function gomainWithLanguage(lang) {
+            window.opener.location.href = getContextPath() + "?lang=" + lang;
+            window.close();
+        }
+
+
+        function getContextPath() {
+            var hostIndex = location.href.indexOf(location.host) + location.host.length;
+            return location.href.substring(hostIndex, location.href.indexOf('/', hostIndex + 1));
+        }
+    </script>
+</body>
+
+</html>

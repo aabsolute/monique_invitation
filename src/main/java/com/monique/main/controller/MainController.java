@@ -53,15 +53,16 @@ public class MainController {
     }
 
     @GetMapping("/our-story")
-    public void getLove_Story(Model model) {
+    public String getLove_Story(Model model) {
         log.debug("OUR-STORY");
+        return "our-story/our-story";
     }
 
     @GetMapping("/sign-up")
     public String getSignUp() {
         log.debug("SIGN-UP");
 
-        return "/sign/sign-up";
+        return "sign/sign-up";
     }
 
     @GetMapping("/sign-in")
@@ -76,7 +77,7 @@ public class MainController {
     public String authorPopGET() throws Exception {
 
         log.info("authorPopGET.......");
-        return "/pop-up/language-popup";
+        return "pop-up/language";
     }
 
     @PostMapping("/createCooKie")

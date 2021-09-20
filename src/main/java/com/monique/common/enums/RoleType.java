@@ -2,6 +2,6 @@ package com.monique.common.enums;
 
 
 public enum RoleType {
-    USER, ADMIN;
+    USER, ADMIN, FAMILY;
 
 }
