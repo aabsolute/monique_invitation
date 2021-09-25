@@ -31,6 +31,7 @@ dependencies {
 	implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.3.8'
 	implementation 'junit:junit:4.13.1'
 	implementation 'net.rakugakibox.util:yaml-resource-bundle:1.1'
+	implementation 'commons-io:commons-io:2.6'
 	//implementation 'org.springframework.boot:spring-boot-starter-security'
 	//implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 	//implementation 'com.maxmind.geoip2:geoip2:2.3.1' // client ip info

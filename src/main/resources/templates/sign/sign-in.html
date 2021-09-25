@@ -2,11 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <th:block th:include="/fragments/common :: main-html-head('html.title')"></th:block>
+    <!-- script-->
+    <th:block th:include="/fragments/common-header :: html-main-header"></th:block>
 </head>
 
 <body>
-    <header th:replace="/fragments/common :: main-header"></header>
+    <header th:replace="/fragments/common-header :: main-header"></header>
 
     <!-- attend_area -->
     <div class="attending_area">
@@ -38,11 +39,11 @@
                                                 </div>
                                                 <div class="col-xl-12">
                                                     <select class="form-select wide" id="default-select" class="">
-                                                        <option data-display="1 Guest">1 Guest</option>
-                                                        <option value="1">2 Guest</option>
-                                                        <option value="2">3 Guest</option>
-                                                        <option value="3">4 Guest</option>
-                                                    </select>
+                                                    <option data-display="1 Guest">1 Guest</option>
+                                                    <option value="1">2 Guest</option>
+                                                    <option value="2">3 Guest</option>
+                                                    <option value="3">4 Guest</option>
+                                                </select>
                                                 </div>
                                                 <div class="col-xl-12">
                                                     <textarea placeholder="Additional Message"></textarea>
@@ -64,11 +65,8 @@
     <!-- / attend_area -->
 
 
-
-
-    <footer th:fragment="main-footer">
-        <th:block th:include="/fragments/common :: main-footer"></th:block>
-    </footer>
+    <!-- script-->
+    <th:block th:include="/fragments/common-footer :: html-main-footer"></th:block>
 </body>
 
 </html>

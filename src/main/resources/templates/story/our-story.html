@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- script-->
+    <th:block th:include="/fragments/common-header :: html-main-header"></th:block>
+</head>
+
+<body>
+    <header th:replace="/fragments/common-header :: main-header"></header>
+
+    <!-- slider-area -->
+    <div class="hero-area2  slider-height2 hero-overly2 d-flex align-items-center ">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="hero-cap text-center pt-50">
+                        <h2>Our Story</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- wedding_countdown -->
+    <div class="weeding_countdown_area">
+        <div class="flowaers_top d-none d-lg-block">
+            <img th:src="@{/img/story/flower-top.png}">
+        </div>
+        <div class="flowaers_bottom d-none d-lg-block">
+            <img th:src="@{/img/story/flower-bottom.png}">
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="section_title text-center">
+                        <img th:src="@{/img/story/flowers.png}">
+                        <span>14. January. 2020</span>
+                        <h3>THE. WEDDING. Countdown</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-12">
+                    <div id="clock" class="countdown_area counter_bg">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- our_love-story -->
+    <div class="love_story_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="section_title text-center">
+                        <img th:src="@{/img/story/flowers.png}">
+                        <h3 th:text="#{label.our-story.heading}">Our. Love. Story</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-4 col-md-6 col-lg-4">
+                    <div class="single_lover_story text-center">
+                        <div class="story_thumb">
+                            <img th:src="@{/img/story/man-profile.png}">
+                        </div>
+                        <span th:text="#{label.our-story.groom.is}">Groom</span>
+                        <h3 th:text="#{label.our-story.groom.name}">ss</h3>
+                        <p th:text="#{label.our-story.groom.introduce}"></p>
+                        <div class="social_links">
+                            <ul>
+                                <li>
+                                    <a href="#"> <i class="fa fa-facebook"></i> </a>
+                                </li>
+                                <li>
+                                    <a href="#"> <i class="fa fa-twitter"></i> </a>
+                                </li>
+                                <li>
+                                    <a href="#"> <i class="fa fa-instagram"></i> </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-6 col-lg-4">
+                    <div class="weding_time_line text-center">
+                        <div class="single_time_line">
+                            <h3 th:text="#{label.our-story.content.first-head}">first meet</h3>
+                            <p th:text="#{label.our-story.content.first-sentence}">Many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some.</p>
+                        </div>
+                        <div class="single_time_line">
+                            <h3 th:text="#{label.our-story.content.second-head}">He Proposed</h3>
+                            <p th:text="#{label.our-story.content.second-sentence}">Many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some.</p>
+                        </div>
+                        <div class="single_time_line">
+                            <h3 th:text="#{label.our-story.content.third-head}">Love Story</h3>
+                            <p th:text="#{label.our-story.content.third-sentence}">Many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some.</p>
+                        </div>
+                        <div class="single_time_line">
+                            <h3>Wedding Day</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4">
+                    <div class="single_lover_story text-center">
+                        <div class="story_thumb">
+                            <img th:src="@{/img/story/woman-profile.png}" alt="">
+                        </div>
+                        <span th:text="#{label.our-story.bride.is}">Bride</span>
+                        <h3 th:text="#{label.our-story.bride.name}">Anjelina Kona</h3>
+                        <p th:text="#{label.our-story.bride.introduce}">Many </p>
+                        <div class="social_links">
+                            <ul>
+                                <li>
+                                    <a href="#"> <i class="fa fa-facebook"></i> </a>
+                                </li>
+                                <li>
+                                    <a href="#"> <i class="fa fa-twitter"></i> </a>
+                                </li>
+                                <li>
+                                    <a href="#"> <i class="fa fa-instagram"></i> </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- script-->
+    <th:block th:include="/fragments/common-footer :: html-main-footer"></th:block>
+    <script>
+        $('#clock').countdown('2020/01/07', function(event) {
+            $(this).html(event.strftime(
+                '<div class="countdown_wrap d-flex"><div  class="single_countdown"><h3>%D</h3><span>Days</span></div><div class="single_countdown"><h3>%H</h3><span>Hours</span></div><div class="single_countdown"><h3>%M</h3><span>Minutes</span></div><div class="single_countdown"><h3>%S</h3><span>Seconds</span></div></div>'
+            ));
+        });
+    </script>
+</body>
+
+</html>

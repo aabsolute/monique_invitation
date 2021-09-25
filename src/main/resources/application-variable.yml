@@ -1,3 +1,5 @@
 wedding:
   date: 20220901
   dateTime: 20220901120000
+cookie:
+  expired-day: 7

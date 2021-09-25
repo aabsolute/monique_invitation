@@ -19,6 +19,11 @@ spring:
     ansi:
       enabled: always
 
+  servlet:
+    multipart:
+      maxFileSize: 10MB
+      maxRequestSize: 20MB
+
   jpa:
     open-in-view: true
     hibernate:

@@ -27,13 +27,18 @@ import java.util.Locale;
 @Controller
 public class MainController {
 
-    private final LocaleChangeInterceptor lci;
+    private final LocaleResolver localeResolver;
 
     private final MessageSource messageSource;
 
+    @Value("${cookie.expired-day}")
+    private int cookieExpiredDay;
+
     @GetMapping("/")
     public String getMain(Model model, HttpServletRequest request, HttpServletResponse response,
-                          @CookieValue(value = "MONIQUE-LANG", required = false) String moniqueLang, @RequestParam(name = "lang", required = false) String paramLang) {
+                          @CookieValue(value = "MONIQUE-LANG", required = false) String moniqueLang
+            //, @RequestParam(name = "lang", required = false) String paramLang
+    ) {
 
         //            user = UserSession.builder().email("").role(RoleType.ADMIN).language(LangType.JP).build();
 
@@ -41,10 +46,12 @@ public class MainController {
         if (moniqueLang != null && !moniqueLang.isEmpty()) {
             cookieLang = moniqueLang;
         }
-        if(paramLang != null && !paramLang.isEmpty()){
-            createLanguageCookie2(paramLang, response);
-            cookieLang = paramLang;
-        }
+//        if(paramLang != null && !paramLang.isEmpty()){
+//            createLanguageCookie2(paramLang, response);
+//            cookieLang = paramLang;
+//        }
+
+
 
         log.debug(messageSource.getMessage("our-story.major.heading", null, Locale.KOREAN));
 
@@ -55,7 +62,7 @@ public class MainController {
     @GetMapping("/our-story")
     public String getLove_Story(Model model) {
         log.debug("OUR-STORY");
-        return "our-story/our-story";
+        return "story/our-story";
     }
 
     @GetMapping("/sign-up")
@@ -95,9 +102,15 @@ public class MainController {
     private void createLanguageCookie2(String language, HttpServletResponse response)
     {
         Cookie myCookie = new Cookie("MONIQUE-LANG", language.toLowerCase());
-        myCookie.setMaxAge(0);
+        myCookie.setMaxAge(cookieExpiredDay*24*60*60);
+
         myCookie.setPath("/"); // 모든 경로에서 접근 가능 하도록 설정
         response.addCookie(myCookie);
+    }
+
+    @GetMapping("/index")
+    public void getIndex(Model model){
+        log.info("get Index");
     }
 
 }

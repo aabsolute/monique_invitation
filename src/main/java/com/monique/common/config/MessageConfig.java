@@ -30,13 +30,13 @@ public class MessageConfig implements WebMvcConfigurer {
         private String encoding;
 
         @Bean
-        public SessionLocaleResolver localeResolver() {
-//            CookieLocaleResolver localeResolver = new CookieLocaleResolver();
-//            localeResolver.setDefaultLocale(Locale.KOREAN);
-//            localeResolver.setCookieName("MONIQUE-LANG");
-//            localeResolver.setCookieMaxAge(0);
-//            localeResolver.setCookiePath("/");
-            return new SessionLocaleResolver();
+        public LocaleResolver localeResolver() {
+            CookieLocaleResolver localeResolver = new CookieLocaleResolver();
+            //localeResolver.setDefaultLocale(Locale.KOREAN);
+            localeResolver.setCookieName("MONIQUE-LANG");
+            localeResolver.setCookieMaxAge(7*24*60*60);
+            localeResolver.setCookiePath("/");
+            return localeResolver;
         }
 
         @Bean
