@@ -1,1 +1,6 @@
-temp: 일요일
+msg: 
+  enum:
+    FRIEND: 친구
+    FAMILY: 가족
+    USER: 일반유저
+    ADMIN: 관리자

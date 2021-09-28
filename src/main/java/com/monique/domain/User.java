@@ -3,11 +3,13 @@ package com.monique.domain;
 import com.monique.common.enums.RoleType;
 import com.monique.user.dto.UserDTO;
 import lombok.*;
+import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 
 @Getter
+@DynamicInsert
 @DynamicUpdate
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor

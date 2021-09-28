@@ -42,13 +42,15 @@
                                                 <div class="col-xl-12">
                                                     <input class="form-control" type="text" th:field="*{userName}" th:placeholder="#{label.sign-up.place-holer.name}" required>
                                                 </div>
-                                                <!-- <div class="col-xl-12">
-                                                    <select class="form-select wide" id="default-select" class="">
-                                                        <option th:each="role : ${T(com.baeldung.thymeleaf.model.Color).values()}" th:value="${role}" th:text="${role}"></option>
-                                                    </select>
-                                                </div> -->
                                                 <div class="col-xl-12">
-                                                    <input class="form-control" type="number" th:field="*{luckyNumber}" pattern="\d*" maxlength="4" th:placeholder="#{label.sign-up.place-holer.lucky-number}" oninput="maxLengthCheck(this)">
+                                                    <select class="form-select wide" id="default-select" th:field="*{role}">
+                                                        <th:block th:each="roletype : ${T(com.monique.common.enums.RoleType).exceptAdmin()}">
+                                                                <option th:value="${roletype}" th:text="#{${'msg.enum.' + roletype}}"></option>
+                                                        </th:block>
+                                                    </select>
+                                                </div>
+                                                <div class="col-xl-12">
+                                                    <input class="form-control" type="number" th:field="*{luckyNumber}" pattern="\d*" maxlength="2" th:placeholder="#{label.sign-up.place-holer.lucky-number}" oninput="maxLengthCheck(this)">
                                                 </div>
                                                 <div class="col-xl-12">
                                                     <p th:text="#{label.sign-up.explain.lucky-number1}"></p>
