@@ -30,6 +30,6 @@ public class Board extends BaseTimeEntity{
     private User user; //db는 관계형이지만 자바에서는 object를 사용할 수 있다
 
     @OneToMany(mappedBy = "board", fetch = FetchType.EAGER) // mappedBy is not has relation we are inverse foreign key
-    private List<BoardReply> reply; //
+    private List<BoardReply> boardReply; //
 
 }

@@ -6,6 +6,7 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @DynamicUpdate
@@ -28,8 +29,12 @@ public class Gallery extends BaseTimeEntity{
 
     private Long fileSize;
 
+    @Column(nullable = false)
     @ColumnDefault("0")
-    private int count;
+    private int likes;
+
+    @OneToMany(mappedBy = "gallery", fetch = FetchType.EAGER) // mappedBy is not has relation we are inverse foreign key
+    private List<GalleryReply> galleryReply; //
 
     @Builder
     public Gallery(String origFileName, String filePath, Long fileSize){

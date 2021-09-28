@@ -1,16 +1,21 @@
 label:
   logo: Wonderful Wedding
+  married: We got Married
   header:
     home: Home
-    ourstory: Our Stroy
-    gallery: Gallery
-    blog: Blog
-    admin: Admin
-    signin-register: Sign-in or Register
+    ourstory: 우리들의 이야기
+    gallery: 사진첩
+    blog: 블로그
+    admin: 관리자
+    signin-register: 로그인 & 회원가입
     signin-register-in: 
-      sign-in: Sign-In
-      sign-up: Sign-Up
-    language: Language
+      sign-in: 로그인
+      sign-up: 회원가입
+    user-information: 회원관리
+    user-information-in: 
+      user-information: 회원정보수정
+      sign-out: 로그아웃
+    language: 언어선택
     language-is:  
       korean: 한국어
       japanese: 日本語
@@ -39,6 +44,15 @@ label:
       third-sentence: 일본에서 이렇게 살고 있음
 
   sign-up:
-    major:
-      title: title
-
+    title: 함께 축하해 주세요
+    place-holer: 
+      name: 이름을 입력하세요
+      email: 이메일주소를 입력하세요
+      password: 비밀번호를 입력하세요
+      password-check: 비밀번호를 한번 더 입력하세요
+      lucky-number: 행운의숫자 2개를 입력하세요      
+    explain: 
+      lucky-number1: 01 ~ 99 사이의 번호를 등록해주세요 추첨을 통해 선물을 드립니다.
+      lucky-number2: 추첨은 한국과 일본에 거주하시는 분들께만 전달이 가능한 점을 양해부탁드리겠습니다.
+    button: 
+      regist: 회원등록

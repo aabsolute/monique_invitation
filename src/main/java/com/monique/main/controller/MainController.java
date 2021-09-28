@@ -65,18 +65,7 @@ public class MainController {
         return "story/our-story";
     }
 
-    @GetMapping("/sign-up")
-    public String getSignUp() {
-        log.debug("SIGN-UP");
 
-        return "sign/sign-up";
-    }
-
-    @GetMapping("/sign-in")
-    public String getSignIn() {
-        log.debug("SIGN-IN");
-        return "/sign/sign-in";
-    }
 
 
     /* 작가 검색 팝업창 */
