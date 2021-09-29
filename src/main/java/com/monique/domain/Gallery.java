@@ -1,18 +1,22 @@
 package com.monique.domain;
 
-import lombok.Builder;
-import lombok.Getter;
+import com.monique.admin.dto.GalleryDTO;
+import com.monique.user.dto.UserDTO;
+import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Getter
-@DynamicUpdate
-@Table(name = "Gallery")
+@DynamicInsert
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
+@Builder(builderMethodName = "GalleryBuilder")
 @Entity
-public class Gallery extends BaseTimeEntity{
+public class Gallery extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,10 +40,13 @@ public class Gallery extends BaseTimeEntity{
     @OneToMany(mappedBy = "gallery", fetch = FetchType.EAGER) // mappedBy is not has relation we are inverse foreign key
     private List<GalleryReply> galleryReply; //
 
-    @Builder
-    public Gallery(String origFileName, String filePath, Long fileSize){
-        this.origFileName = origFileName;
-        this.filePath = filePath;
-        this.fileSize = fileSize;
+    public static Gallery.GalleryBuilder builder(GalleryDTO gallery) {
+        return GalleryBuilder()
+                .id(gallery.getId())
+                .fileName(gallery.getFileName())
+                .origFileName(gallery.getOrigFileName())
+                .filePath(gallery.getFilePath())
+                .fileSize(gallery.getFileSize())
+                .likes(gallery.getLikes());
     }
 }

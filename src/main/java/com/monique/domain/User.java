@@ -39,14 +39,14 @@ public class User extends BaseTimeEntity {
     @Column(length = 4)
     private String luckyNumber;
 
-    public static UserBuilder builder(UserDTO userDTO) {
+    public static UserBuilder builder(UserDTO user) {
         return UserBuilder()
-                .id(userDTO.getId())
-                .email(userDTO.getEmail())
-                .userName(userDTO.getUserName())
-                .photo(userDTO.getPhoto())
-                .role(userDTO.getRole())
-                .luckyNumber(userDTO.getLuckyNumber());
+                .id(user.getId())
+                .email(user.getEmail())
+                .userName(user.getUserName())
+                .photo(user.getPhoto())
+                .role(user.getRole())
+                .luckyNumber(user.getLuckyNumber());
     }
 
 }
