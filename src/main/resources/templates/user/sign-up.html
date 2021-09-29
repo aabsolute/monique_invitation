@@ -4,6 +4,7 @@
 <head>
     <th:block th:include="/fragments/common-header :: html-main-header"></th:block>
     <link rel="stylesheet" th:href="@{/css/sunshine/story.css}">
+    <link rel="stylesheet" th:href="@{/css/sunshine/nice-select.css}">
 </head>
 
 <body>
@@ -44,7 +45,7 @@
                                                 </div>
                                                 <div class="col-xl-12">
                                                     <select class="form-select wide" id="default-select" th:field="*{role}">
-                                                        <th:block th:each="roletype : ${T(com.monique.common.enums.RoleType).exceptAdmin()}">
+                                                        <th:block th:each="roletype : ${T(com.monique.common.enums.RoleType).exceptAdmin()}">                                                            
                                                                 <option th:value="${roletype}" th:text="#{${'msg.enum.' + roletype}}"></option>
                                                         </th:block>
                                                     </select>
@@ -71,7 +72,7 @@
         </div>
     </div>
 
-    <th:block th:include="/fragments/common-footer :: html-main-footer "></th:block>
+    <th:block th:include="/fragments/common-footer :: html-main-footer"></th:block>
     <script>
         function maxLengthCheck(object) {
             if (object.value.length > object.maxLength) {

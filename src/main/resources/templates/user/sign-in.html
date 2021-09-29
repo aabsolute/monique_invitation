@@ -8,7 +8,68 @@
 
 <body>
     <header th:replace="/fragments/common-header :: main-header"></header>
+    <th:block th:include="/fragments/common-header :: slim-image-slider('label.header.signin-register-in.sign-up')"></th:block>
 
+    <div class="attending_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-10 offset-xl-1 col-lg-10 offset-lg-1">
+                    <div class="main_attending_area">
+                        <div class="flower_1 d-none d-lg-block">
+                            <img th:src="@{/img/user/flower-top.png}">
+                        </div>
+                        <div class="flower_2 d-none d-lg-block">
+                            <img th:src="@{/img/user/flower-bottom.png}">
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-xl-7 col-lg-8">
+                                <div class="popup_box ">
+                                    <div class="popup_inner">
+                                        <div class="form_heading text-center">
+                                            <h3 th:text="#{label.sign-up.title}">Are You Attending?</h3>
+                                        </div>
+                                        <form th:action="@{/sign-up}" method="post" th:object="${registerUser}">
+                                            <div class="row">
+                                                <div class="col-xl-12">
+                                                    <input class="form-control" type="email" th:field="*{email}" th:placeholder="#{label.sign-up.place-holer.email}" required>
+                                                </div>
+                                                <div class="col-xl-12">
+                                                    <input class="form-control" type="password" th:field="*{password}" th:placeholder="#{label.sign-up.place-holer.password}" required>
+                                                </div>
+                                                <div class="col-xl-12">
+                                                    <input class="form-control" type="password" th:field="*{passwordCheck}" th:placeholder="#{label.sign-up.place-holer.password-check}" required>
+                                                </div>
+                                                <div class="col-xl-12">
+                                                    <input class="form-control" type="text" th:field="*{userName}" th:placeholder="#{label.sign-up.place-holer.name}" required>
+                                                </div>
+                                                <div class="col-xl-12">
+                                                    <select class="form-select wide" id="default-select" th:field="*{role}">
+                                                        <th:block th:each="roletype : ${T(com.monique.common.enums.RoleType).exceptAdmin()}">                                                            
+                                                                <option th:value="${roletype}" th:text="#{${'msg.enum.' + roletype}}"></option>
+                                                        </th:block>
+                                                    </select>
+                                                </div>
+                                                <div class="col-xl-12">
+                                                    <input class="form-control" type="number" th:field="*{luckyNumber}" pattern="\d*" maxlength="2" th:placeholder="#{label.sign-up.place-holer.lucky-number}" oninput="maxLengthCheck(this)">
+                                                </div>
+                                                <div class="col-xl-12">
+                                                    <p th:text="#{label.sign-up.explain.lucky-number1}"></p>
+                                                    <p th:text="#{label.sign-up.explain.lucky-number2}"></p>
+                                                </div>
+                                                <div class="col-xl-12">
+                                                    <button type="submit" class="boxed_btn3 form-control" th:text="#{label.sign-up.button.regist}">REGIST</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 

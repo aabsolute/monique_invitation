@@ -3,7 +3,11 @@ package com.monique.common.enums;
 import lombok.Getter;
 
 import javax.management.relation.Role;
+import java.awt.*;
+import java.util.EnumSet;
 import java.util.List;
+
+import static java.util.EnumSet.complementOf;
 
 @Getter
 public enum RoleType {
@@ -19,15 +23,8 @@ public enum RoleType {
         this.authority  = authority ;
     }
 
-    public RoleType[] exceptAdmin(){
-        RoleType[] AllRole = RoleType.values();
-        RoleType[] role = new RoleType[3];
-        for(int i = 0; i < AllRole.length; i++)
-        {
-            if(AllRole[i] != ADMIN)
-                role[i] = AllRole[i];
-        }
-
-        return role;
+    public static RoleType[] exceptAdmin(){
+        EnumSet<RoleType> set = EnumSet.complementOf(EnumSet.of(RoleType.ADMIN));
+        return set.toArray(new RoleType[set.size()]);
     }
 }
