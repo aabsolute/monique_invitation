@@ -9,11 +9,10 @@ import org.hibernate.annotations.DynamicUpdate;
 import javax.persistence.*;
 
 @Getter
-@DynamicInsert
-@DynamicUpdate
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder(builderMethodName = "UserBuilder")
+@Table(name = "user")
 @Entity
 public class User extends BaseTimeEntity {
 
@@ -44,6 +43,7 @@ public class User extends BaseTimeEntity {
                 .id(user.getId())
                 .email(user.getEmail())
                 .userName(user.getUserName())
+                .password(user.getPassword())
                 .photo(user.getPhoto())
                 .role(user.getRole())
                 .luckyNumber(user.getLuckyNumber());

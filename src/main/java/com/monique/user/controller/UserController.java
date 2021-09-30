@@ -21,14 +21,18 @@ public class UserController {
 
     @GetMapping("/sign-in")
     public String getSignIn(Model model){
+        log.debug("get SIGN-UP");
+        model.addAttribute("signInUser", new UserDTO());
 
         return "user/sign-in";
     }
 
     @PostMapping("/sign-in")
-    public String postSignIn(Model model){
+    public String postSignIn(Model model, @ModelAttribute UserDTO userDTO){
+        if(userDTO != null)
+            userService.getUserByEmail(userDTO.getEmail());
 
-        return "user/sign-in";
+        return "main";
     }
 
 
@@ -46,9 +50,9 @@ public class UserController {
         User user = User.builder(userDTO).build();
 
         if(user != null)
-            userService.registUser(user);
+            userService.postUser(user);
 
         log.debug(" @post SIGN-UP");
-        return "/";
+        return "main";
     }
 }

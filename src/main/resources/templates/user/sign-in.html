@@ -4,11 +4,12 @@
 <head>
     <!-- script-->
     <th:block th:include="/fragments/common-header :: html-main-header"></th:block>
+    <link rel="stylesheet" th:href="@{/css/sunshine/story.css}">
 </head>
 
 <body>
     <header th:replace="/fragments/common-header :: main-header"></header>
-    <th:block th:include="/fragments/common-header :: slim-image-slider('label.header.signin-register-in.sign-up')"></th:block>
+    <th:block th:include="/fragments/common-header :: slim-image-slider('label.header.signin-register-in.sign-in')"></th:block>
 
     <div class="attending_area">
         <div class="container">
@@ -26,9 +27,9 @@
                                 <div class="popup_box ">
                                     <div class="popup_inner">
                                         <div class="form_heading text-center">
-                                            <h3 th:text="#{label.sign-up.title}">Are You Attending?</h3>
+                                            <h3 th:text="#{label.sign-in.title}">Sign-in</h3>
                                         </div>
-                                        <form th:action="@{/sign-up}" method="post" th:object="${registerUser}">
+                                        <form th:action="@{/sign-in}" method="post" th:object="${registerUser}">
                                             <div class="row">
                                                 <div class="col-xl-12">
                                                     <input class="form-control" type="email" th:field="*{email}" th:placeholder="#{label.sign-up.place-holer.email}" required>
@@ -37,27 +38,7 @@
                                                     <input class="form-control" type="password" th:field="*{password}" th:placeholder="#{label.sign-up.place-holer.password}" required>
                                                 </div>
                                                 <div class="col-xl-12">
-                                                    <input class="form-control" type="password" th:field="*{passwordCheck}" th:placeholder="#{label.sign-up.place-holer.password-check}" required>
-                                                </div>
-                                                <div class="col-xl-12">
-                                                    <input class="form-control" type="text" th:field="*{userName}" th:placeholder="#{label.sign-up.place-holer.name}" required>
-                                                </div>
-                                                <div class="col-xl-12">
-                                                    <select class="form-select wide" id="default-select" th:field="*{role}">
-                                                        <th:block th:each="roletype : ${T(com.monique.common.enums.RoleType).exceptAdmin()}">                                                            
-                                                                <option th:value="${roletype}" th:text="#{${'msg.enum.' + roletype}}"></option>
-                                                        </th:block>
-                                                    </select>
-                                                </div>
-                                                <div class="col-xl-12">
-                                                    <input class="form-control" type="number" th:field="*{luckyNumber}" pattern="\d*" maxlength="2" th:placeholder="#{label.sign-up.place-holer.lucky-number}" oninput="maxLengthCheck(this)">
-                                                </div>
-                                                <div class="col-xl-12">
-                                                    <p th:text="#{label.sign-up.explain.lucky-number1}"></p>
-                                                    <p th:text="#{label.sign-up.explain.lucky-number2}"></p>
-                                                </div>
-                                                <div class="col-xl-12">
-                                                    <button type="submit" class="boxed_btn3 form-control" th:text="#{label.sign-up.button.regist}">REGIST</button>
+                                                    <button type="submit" class="boxed_btn3 form-control" th:text="#{label.sign-in.button.sign-in}">SIGN-IN</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -70,7 +51,6 @@
             </div>
         </div>
     </div>
-
 
 
     <!-- script-->
