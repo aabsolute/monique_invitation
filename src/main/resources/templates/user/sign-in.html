@@ -29,13 +29,13 @@
                                         <div class="form_heading text-center">
                                             <h3 th:text="#{label.sign-in.title}">Sign-in</h3>
                                         </div>
-                                        <form th:action="@{/sign-in}" method="post" th:object="${registerUser}">
+                                        <form th:action="@{/sign-in}" method="post">
                                             <div class="row">
                                                 <div class="col-xl-12">
-                                                    <input class="form-control" type="email" th:field="*{email}" th:placeholder="#{label.sign-up.place-holer.email}" required>
+                                                    <input class="form-control" type="email" id="email" name="email" th:placeholder="#{label.sign-up.place-holer.email}" required>
                                                 </div>
                                                 <div class="col-xl-12">
-                                                    <input class="form-control" type="password" th:field="*{password}" th:placeholder="#{label.sign-up.place-holer.password}" required>
+                                                    <input class="form-control" type="password" id="password" name="password" th:placeholder="#{label.sign-up.place-holer.password}" required>
                                                 </div>
                                                 <div class="col-xl-12">
                                                     <button type="submit" class="boxed_btn3 form-control" th:text="#{label.sign-in.button.sign-in}">SIGN-IN</button>

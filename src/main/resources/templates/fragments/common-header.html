@@ -83,7 +83,6 @@
                                             <li><a th:href="@{/our-story}" th:text="#{label.header.ourstory}">Ourstory</a></li>
                                             <li><a th:href="@{/gallery}" th:text="#{label.header.gallery}">Gallery</a></li>
                                             <li><a th:href="@{/blog}" th:text="#{label.header.blog}">blog</a></li>
-
                                             <th:block th:if="${session.userSession} eq null">
                                                 <li class="login">
                                                     <a href="#" th:text="#{label.header.signin-register}">
@@ -100,7 +99,7 @@
                                                         <i class="ti-user"></i>User Infomation</a>
                                                     <ul class="submenu">
                                                         <li><a th:href="@{/user-information}" th:text="#{label.header.user-information-in.user-information}">userInfo</a></li>
-                                                        <li><a th:href="@{/sign-out}" th:text="#{label.header.user-information-in.sign-up}">Sign-out</a></li>
+                                                        <li><a th:href="@{/sign-out}" th:text="#{label.header.user-information-in.sign-out}">Sign-out</a></li>
                                                     </ul>
                                                 </li>
                                             </th:block>
@@ -112,7 +111,7 @@
                                                 </ul>
                                             </li>
                                             <th:block th:if="${session.userSession} != null and ${session.userSession.role.name} eq 'ADMIN'">
-                                                <li><a th:href="@{/admin}" th:text="#{label.header.admin}">admin</a></li>
+                                                <li><a th:href="@{/admin/main}" th:text="#{label.header.admin}">admin</a></li>
                                             </th:block>
                                         </ul>
                                     </nav>

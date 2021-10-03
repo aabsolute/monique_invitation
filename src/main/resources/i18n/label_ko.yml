@@ -56,3 +56,10 @@ label:
       lucky-number2: 추첨은 한국과 일본에 거주하시는 분들께만 전달이 가능한 점을 양해부탁드리겠습니다.
     button: 
       regist: 회원등록
+  sign-in: 
+    title: 로그인
+    place-holer: 
+      email: 이메일주소를 입력하세요
+      password: 비밀번호를 입력하세요
+    button: 
+      sign-in: 회원등록

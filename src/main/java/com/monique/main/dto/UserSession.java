@@ -2,18 +2,18 @@ package com.monique.main.dto;
 
 import com.monique.common.enums.LangType;
 import com.monique.common.enums.RoleType;
+import com.monique.user.dto.UserDTO;
 import lombok.*;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
-import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.io.Serializable;
+import java.util.Locale;
 
 @Getter
-@Builder
-@Component
 @Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
+@Builder(builderMethodName = "UserSessionBuilder")
 @ToString
 public class UserSession implements Serializable{
 
@@ -25,9 +25,11 @@ public class UserSession implements Serializable{
 
     private LangType language;
 
-    public void logInAndSetEmail(String userEmail){
-        this.email = userEmail;
+    public static UserSessionBuilder builder(UserDTO user, Locale locale) {
+        return UserSessionBuilder()
+                .email(user.getEmail())
+                .role(user.getRole())
+                .language(LangType.setLangTypeByLocale(locale));
     }
-
 
 }

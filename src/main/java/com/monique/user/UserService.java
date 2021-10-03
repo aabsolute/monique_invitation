@@ -8,6 +8,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -19,15 +20,18 @@ public class UserService {
     @Autowired
     ModelMapper modelMapper;
 
-    public void postUser(User user){
-        userRepository.save(user);
+    //1. register user
+    public void postUser(UserDTO userDTO){
+        userRepository.save(User.builder(userDTO).build());
     }
 
-    public UserDTO getUserByEmail(String email){
-        User user = userRepository.findByEmail(email);
-        //List<BoardDTO> boardDTO = board.stream().map(p-> modelMapper.map(p,BoardDTO.class)).collect(Collectors.toList());
-        return modelMapper.map(user, UserDTO.class);
+
+    public UserDTO findUser(UserDTO userDTO){
+        User user = User.builder(userDTO).build();
+        return modelMapper.map(userRepository.findUserForLogIn(user.getEmail(), user.getPassword()), UserDTO.class);
     }
+
+
 
 
 }

@@ -14,9 +14,6 @@ public class UrlLocaleResolver implements LocaleResolver {
 
     @Override
     public Locale resolveLocale(HttpServletRequest request) {
-        // ==> /SomeContextPath/en/...
-        // ==> /SomeContextPath/fr/...
-        // ==> /SomeContextPath/WEB-INF/pages/...
         String uri = request.getRequestURI();
 
         log.info("URI=" + uri);

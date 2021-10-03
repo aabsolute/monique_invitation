@@ -12,7 +12,6 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder(builderMethodName = "UserBuilder")
-@Table(name = "user")
 @Entity
 public class User extends BaseTimeEntity {
 

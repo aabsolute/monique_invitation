@@ -14,6 +14,7 @@ public enum RoleType {
     FRIEND("ROLE_FRIEND"),
     FAMILY("ROLE_FAMILY"),
     USER("ROLE_USER"),
+    ATTENDEE("ROLE_ATTENDEE"),
     ADMIN("ROLE_ADMIN");
 
 
@@ -24,7 +25,7 @@ public enum RoleType {
     }
 
     public static RoleType[] exceptAdmin(){
-        EnumSet<RoleType> set = EnumSet.complementOf(EnumSet.of(RoleType.ADMIN));
+        EnumSet<RoleType> set = EnumSet.complementOf(EnumSet.of(RoleType.ADMIN, RoleType.ATTENDEE));
         return set.toArray(new RoleType[set.size()]);
     }
 }

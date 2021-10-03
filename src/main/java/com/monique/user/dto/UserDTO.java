@@ -32,6 +32,7 @@ public class UserDTO {
     private String photo;
 
     private RoleType role;
+
     @Max(2)
     private String luckyNumber;
 
