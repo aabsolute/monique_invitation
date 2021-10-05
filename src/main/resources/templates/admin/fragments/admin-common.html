@@ -1,0 +1,201 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="html-admin-header">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title>Light Bootstrap Dashboard by Creative Tim</title>
+
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+
+
+    <!-- Bootstrap core CSS     -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/admin/animate.min.css}">
+    <link rel="stylesheet" th:href="@{/css/admin/light-bootstrap-dashboard.css}">
+
+    <!--  CSS for Demo Purpose, don't include it in your project
+    <link href="assets/css/demo.css" rel="stylesheet" />     -->
+
+    <!--     Fonts and icons     -->
+    <script src="https://kit.fontawesome.com/1eb5a0d92c.js" crossorigin="anonymous"></script>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" th:href="@{/css/admin/style.css}">
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <div class="sidebar" data-color="black" th:fragment="main-admin-sidebar">
+            <div class="sidebar-wrapper">
+                <div class="logo">
+                    <a href="#" class="simple-text">
+                    </a>
+                </div>
+
+                <ul class="nav">
+                    <li class="active">
+                        <a th:href="@{/admin/main}">
+                            <i class="fas fa-columns"></i>
+                            <p th:text="#{label.admin.header.management}">Dashboard</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a th:href="@{/admin/user}">
+                            <i class="fas fa-address-book"></i>
+                            <p th:text="#{label.admin.header.user}">User Managetment</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="table.html">
+                            <i class="fas fa-th-large"></i>
+                            <p th:text="#{label.admin.header.gallery}">gallery Managetment</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="typography.html">
+                            <i class="fas fa-th-large"></i>
+                            <p th:text="#{label.admin.header.management}">blog Managetment</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="icons.html">
+                            <i class="fas fa-network-wired"></i>
+                            <p th:text="#{label.admin.header.web}">web maintance</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="icons.html">
+                            <i class="fas fa-network-wired"></i>
+                            <p th:text="#{label.admin.header.back-home}">web maintance</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="main-panel">
+            <nav class="navbar navbar-default navbar-fixed">
+                <div class="container-fluid">
+                    <!-- <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                        <a class="navbar-brand" href="#">Dashboard</a>
+                    </div>
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-left">
+                            <li>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa fa-dashboard"></i>
+                                    <p class="hidden-lg hidden-md">Dashboard</p>
+                                </a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa fa-globe"></i>
+                                    <b class="caret hidden-lg hidden-md"></b>
+                                    <p class="hidden-lg hidden-md">
+                                        5 Notifications
+                                        <b class="caret"></b>
+                                    </p>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Notification 1</a></li>
+                                    <li><a href="#">Notification 2</a></li>
+                                    <li><a href="#">Notification 3</a></li>
+                                    <li><a href="#">Notification 4</a></li>
+                                    <li><a href="#">Another notification</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="">
+                                    <i class="fa fa-search"></i>
+                                    <p class="hidden-lg hidden-md">Search</p>
+                                </a>
+                            </li>
+                        </ul>
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a href="">
+                                    <p>Account</p>
+                                </a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <p>
+                                        Dropdown
+                                        <b class="caret"></b>
+                                    </p>
+
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Action</a></li>
+                                    <li><a href="#">Another action</a></li>
+                                    <li><a href="#">Something</a></li>
+                                    <li><a href="#">Another action</a></li>
+                                    <li><a href="#">Something</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#">Separated link</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <p>Log out</p>
+                                </a>
+                            </li>
+                            <li class="separator hidden-lg"></li>
+                        </ul>
+                    </div> -->
+                </div>
+            </nav>
+        </div>
+    </div>
+
+
+</body>
+<th:block th:fragment="main-admin-footer">
+    <!--   Core JS Files   -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+    <!-- <script src="assets/js/jquery.3.2.1.min.js" type="text/javascript"></script>
+<script src="assets/js/bootstrap.min.js" type="text/javascript"></script> -->
+
+    <!--  Charts Plugin -->
+    <script th:src="@{/js/admin/chartist.min.js}"></script>
+
+    <!--  Notifications Plugin    -->
+    <script th:src="@{/js/admin/bootstrap-notify.js}"></script>
+
+    <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
+    <script th:src="@{/js/admin/light-bootstrap-dashboard.js}"></script>
+    <script th:src="@{/js/admin/demo.js}"></script>
+    <!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
+    <!-- <script src="assets/js/demo.js"></script> -->
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            demo.initChartist();
+
+            $.notify({
+                icon: 'pe-7s-gift',
+                message: "Welcome to <b>Light Bootstrap Dashboard</b> - a beautiful freebie for every web developer."
+
+            }, {
+                type: 'info',
+                timer: 4000
+            });
+
+        });
+    </script>
+</th:block>
+
+</html>

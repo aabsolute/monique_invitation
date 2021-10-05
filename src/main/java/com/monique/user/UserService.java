@@ -21,14 +21,19 @@ public class UserService {
     ModelMapper modelMapper;
 
     //1. register user
-    public void postUser(UserDTO userDTO){
+    public void postUser(UserDTO userDTO) {
         userRepository.save(User.builder(userDTO).build());
     }
 
 
-    public UserDTO findUser(UserDTO userDTO){
+    public UserDTO findUser(UserDTO userDTO) {
         User user = User.builder(userDTO).build();
-        return modelMapper.map(userRepository.findUserForLogIn(user.getEmail(), user.getPassword()), UserDTO.class);
+        return modelMapper.map(userRepository.findByEmailAndPassword(user.getEmail(), user.getPassword()), UserDTO.class);
+    }
+
+    public List<UserDTO> getAllUserList()
+    {
+        return userRepository.findAllUserForManagement().stream().map(p-> modelMapper.map(p,UserDTO.class)).collect(Collectors.toList());
     }
 
 

@@ -63,3 +63,20 @@ label:
       password: 비밀번호를 입력하세요
     button: 
       sign-in: 회원등록
+
+  admin: 
+    title: 관리자페이지
+    header: 
+      management: DashBoard
+      user: User Managetment
+      gallery: gallery Managetment
+      blog: blog Managetment
+      web: web Managetment
+      back-home: back to Home
+    user-management: 
+      title: 전체유저
+      user-id: ID
+      user-name: 유저명
+      user-email: 이메일
+      user-role: 권한
+      user-luckyNumber: 행운의번호

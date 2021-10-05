@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="admin/fragments/admin-common :: html-admin-header">
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <div th:replace="admin/fragments/admin-common :: main-admin-sidebar"></div>
+        <div class="main-panel">
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card card-plain">
+                                <div class="header">
+                                    <h4 class="title">UserList</h4>
+                                    <p class="category">Here is a subtitle for this table</p>
+                                </div>
+                                <div class="content table-responsive table-full-width">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <th>ID</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Role</th>
+                                            <th>luckyNumber</th>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each="user: ${userList}">
+                                                <td th:text="${user.id}"></td>
+                                                <td th:text="${user.userName}"></td>
+                                                <td th:text="${user.email}"></td>
+                                                <td th:text="${user.role}"></td>
+                                                <td th:text="${user.luckyNumber}"></td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <th:block th:include="admin/fragments/admin-common :: main-admin-footer"></th:block>
+</body>
+
+</html>

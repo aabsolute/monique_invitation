@@ -14,7 +14,7 @@
     <link rel="stylesheet" th:href="@{/css/main/flaticon.css}">
     <link rel="stylesheet" th:href="@{/css/main/animate.min.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" integrity="sha512-+EoPw+Fiwh6eSeRK7zwIKG2MA8i3rV/DGa3tdttQGgWyatG/SkncT53KHQaS5Jh9MNOT3dmFL0FjTY08And/Cw==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/1eb5a0d92c.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" th:href="@{/css/main/themify-icons.css}">
     <link rel="stylesheet" th:href="@{/css/main/slick.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" integrity="sha512-CruCP+TD3yXzlvvijET8wV5WxxEh5H8P4cmz0RFbKK6FlZ2sYl3AEsKlLPHbniXKSrDdFewhbmBK5skbdsASbQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
@@ -66,15 +66,12 @@
                     <div class="container-fluid">
                         <div class="row align-items-center">
                             <!-- Logo -->
-                            <div class="col-xl-2 col-lg-2 col-md-3">
+                            <!-- <div class="col-xl-2 col-lg-2 col-md-3">
                                 <div class="logo">
                                     <span th:text="#{label.logo}">Wonderful Wedding</span>
-                                    <!-- <a th:href="@{/}"><img th:src="@{/img/main/logo.png}">
-                                        <h3 th:text="#{label.logo}">Wonderful Wedding</h3>
-                                    </a> -->
                                 </div>
-                            </div>
-                            <div class="col-xl-10 col-lg-10 col-md-8">
+                            </div> -->
+                            <div class="col-xl-12 col-lg-12 col-md-8">
                                 <!-- Main-menu -->
                                 <div class="main-menu f-right d-none d-lg-block">
                                     <nav>
@@ -86,7 +83,7 @@
                                             <th:block th:if="${session.userSession} eq null">
                                                 <li class="login">
                                                     <a href="#" th:text="#{label.header.signin-register}">
-                                                        <i class="ti-user"></i>Sign in or Register</a>
+                                                        <i class="fas fa-users"></i>Sign in or Register</a>
                                                     <ul class="submenu">
                                                         <li><a th:href="@{/sign-in}" th:text="#{label.header.signin-register-in.sign-in}">Sign-in</a></li>
                                                         <li><a th:href="@{/sign-up}" th:text="#{label.header.signin-register-in.sign-up}">Sign-up</a></li>
@@ -96,7 +93,7 @@
                                             <th:block th:unless="${session.userSession} eq null">
                                                 <li class="login">
                                                     <a href="#" th:text="#{label.header.user-information}">
-                                                        <i class="ti-user"></i>User Infomation</a>
+                                                        <i class="fas fa-users"></i>User Infomation</a>
                                                     <ul class="submenu">
                                                         <li><a th:href="@{/user-information}" th:text="#{label.header.user-information-in.user-information}">userInfo</a></li>
                                                         <li><a th:href="@{/sign-out}" th:text="#{label.header.user-information-in.sign-out}">Sign-out</a></li>
