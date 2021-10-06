@@ -15,8 +15,8 @@
                         <div class="col-md-12">
                             <div class="card card-plain">
                                 <div class="header">
-                                    <h4 class="title">UserList</h4>
-                                    <p class="category">Here is a subtitle for this table</p>
+                                    <h4 class="title">gallery list/h4>
+                                        <p class="category">Here is a subtitle for this table</p>
                                 </div>
                                 <div class="content table-responsive table-full-width">
                                     <table class="table table-hover">
@@ -28,7 +28,7 @@
                                             <th>luckyNumber</th>
                                         </thead>
                                         <tbody>
-                                            <tr th:each="user: ${pages}">
+                                            <tr th:each="user: ${userList}">
                                                 <td th:text="${user.id}"></td>
                                                 <td th:text="${user.userName}"></td>
                                                 <td th:text="${user.email}"></td>
@@ -40,32 +40,34 @@
                                 </div>
                             </div>
                         </div>
-                        <th:block th:with="start=${(pages.number/maxPage) * maxPage + 1},
+                        <div class="page-num" th:with="start=${(pages.number/maxPage)*maxPage + 1},
                   end=(${(pages.totalPages == 0) ? 1 : (start + (maxPage - 1) < pages.totalPages ? start + (maxPage - 1) : pages.totalPages)})">
-                            <ul class="pagination justify-content-center">
-                                <li class="page-item" th:if="${start > 1}">
-                                    <a th:href="@{/admin/user-manager?(page=0)}"><i class="fas fa-angle-double-left"></i></a>
+                            <ul>
+                                <li th:if="${start > 1}">
+                                    <a th:href="@{/list?(page=0)}" th:text="'<<'"></a>
                                 </li>
                                 </li>
 
-                                <li class="page-item" th:if="${start > 1}">
-                                    <a th:href="@{/admin/user-manager?(page=${start - maxPage})}"><i class="fas fa-chevron-left"></i></a>
+                                <li th:if="${start > 1}">
+                                    <a th:href="@{/list?(page=${start - maxPage})}" th:text="'<'"></a>
                                 </li>
-                                <li class="page-item" th:each="page: ${#numbers.sequence(start, end)}">
-                                    <a th:href="@{/admin/user-manager?(page=${page-1})}" th:text="${page}"></a>
+
+
+                                <li th:each="page: ${#numbers.sequence(start, end)}">
+                                    <a th:href="@{/list?(page=${page-1})}" th:text="${page}"></a>
                                 </li>
                                 </li>
 
-                                <li class="page-item" th:if="${end < pages.totalPages}">
-                                    <a th:href="@{/admin/user-manager?(page=${start + maxPage})}"><i class="fas fa-chevron-right"></i></a>
+                                <li th:if="${end < pages.totalPages}">
+                                    <a th:href="@{/list?(page=${start + maxPage})}" th:text="'>'"></a>
                                 </li>
 
-                                <li class="page-item" th:if="${end < pages.totalPages}">
-                                    <a th:href="@{/admin/user-manager?(page=${pages.totalPages-1})}"><i class="fas fa-angle-double-right"></i></a>
+                                <li th:if="${end < pages.totalPages}">
+                                    <a th:href="@{/list?(page=${pages.totalPages-1})}" th:text="'>>'"></a>
                                 </li>
                                 </li>
                             </ul>
-                        </th:block>
+                        </div>
                     </div>
                 </div>
             </div>

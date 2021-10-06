@@ -51,8 +51,6 @@ public class MainController {
 //            cookieLang = paramLang;
 //        }
 
-
-
         log.debug(messageSource.getMessage("our-story.major.heading", null, Locale.KOREAN));
 
         model.addAttribute("cookieLang", cookieLang);
@@ -66,27 +64,6 @@ public class MainController {
     }
 
 
-
-
-    /* 작가 검색 팝업창 */
-    @GetMapping("/language-popup")
-    public String authorPopGET() throws Exception {
-
-        log.info("authorPopGET.......");
-        return "pop-up/language";
-    }
-
-    @PostMapping("/createCooKie")
-    @ResponseBody()
-    public String createLanguageCookie(@RequestParam(name = "lang") String language, HttpServletResponse response){
-
-        Cookie myCookie = new Cookie("MONIQUE-LANG", language.toLowerCase());
-        myCookie.setMaxAge(0);
-        myCookie.setPath("/"); // 모든 경로에서 접근 가능 하도록 설정
-        response.addCookie(myCookie);
-
-        return language;
-    }
 
     private void createLanguageCookie2(String language, HttpServletResponse response)
     {

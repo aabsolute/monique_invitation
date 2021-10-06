@@ -1,18 +1,21 @@
 package com.monique.user.repository;
 
 import com.monique.domain.User;
-import com.monique.user.dto.UserDTO;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    @Query(value="select u.id, u.email, u.role, u.user_Name, u.lucky_Number from User u", nativeQuery = true)
+    @Query(value="select new com.monique.domain.User(u.id, u.email,  u.userName, u.role,u.luckyNumber )from User u")
     List<User> findAllUserForManagement();
 
-    User findByEmailAndPassword(String email, String password);
+    Optional<User> findByEmailAndPassword(String email, String password);
+
 
 }

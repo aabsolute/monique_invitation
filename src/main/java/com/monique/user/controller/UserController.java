@@ -1,20 +1,20 @@
 package com.monique.user.controller;
 
-import com.monique.domain.User;
 import com.monique.main.dto.UserSession;
-import com.monique.user.UserService;
+import com.monique.user.service.UserService;
 import com.monique.user.dto.UserDTO;
-import com.monique.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.util.WebUtils;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Locale;
 
@@ -64,4 +64,20 @@ public class UserController {
         log.debug(" @post SIGN-UP");
         return "redirect:/";
     }
+
+    @GetMapping("/sign-out")
+    public String logOut(HttpSession session){
+        log.debug("get SIGN-OUT");
+
+        UserSession user = (UserSession)session.getAttribute("userSession");
+
+        if(user!= null)
+        {
+            session.removeAttribute("userSession");
+            session.invalidate();
+        }
+        return "redirect:/";
+    }
+
+
 }

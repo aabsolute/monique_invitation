@@ -2,16 +2,11 @@ package com.monique.service;
 
 import com.monique.common.enums.RoleType;
 import com.monique.domain.User;
-import com.monique.user.UserService;
 import com.monique.user.dto.UserDTO;
 import com.monique.user.repository.UserRepository;
-import org.apache.catalina.realm.UserDatabaseRealm;
-import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -21,16 +16,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 
 @SpringBootTest
-@DataJpaTest
-public class UserServiceTest {
+@RunWith(SpringRunner.class)
+public class UserRepositoryTest {
 
     @Autowired
     UserRepository userRepository;
 
-    @After
-    public void cleanup() {
-        userRepository.deleteAll();
-    }
 
     @Test
     public void test_postUser() {
@@ -64,4 +55,13 @@ public class UserServiceTest {
         assertThat("vvfrrr@nate.com".equals(user1.getEmail()));
         assertThat(RoleType.ADMIN.toString().equals(user1.getEmail()));
     }
+
+    @Test
+    public void getUserExceptPassword() {
+        List<User> userList = userRepository.findAllUserForManagement();
+
+        assertThat("곽성환".equals(userList.get(0).getUserName()));
+    }
+
+
 }

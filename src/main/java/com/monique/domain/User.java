@@ -17,6 +17,7 @@ public class User extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(updatable = false)
     private long id;
 
     @Column(length = 32, nullable = false, unique=true)
@@ -47,5 +48,15 @@ public class User extends BaseTimeEntity {
                 .role(user.getRole())
                 .luckyNumber(user.getLuckyNumber());
     }
+
+    public User(Long id, String email, String userName, RoleType role, String luckyNumber)
+    {
+        this.id = id;
+        this.email = email;
+        this.userName = userName;
+        this.role = role;
+        this.luckyNumber = luckyNumber;
+    }
+
 
 }
