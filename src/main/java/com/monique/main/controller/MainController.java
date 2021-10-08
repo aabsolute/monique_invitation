@@ -19,6 +19,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.net.URLEncoder;
 import java.time.LocalDateTime;
 import java.util.Locale;
 
@@ -37,22 +38,12 @@ public class MainController {
     @GetMapping("/")
     public String getMain(Model model, HttpServletRequest request, HttpServletResponse response,
                           @CookieValue(value = "MONIQUE-LANG", required = false) String moniqueLang
-            //, @RequestParam(name = "lang", required = false) String paramLang
     ) {
-
-        //            user = UserSession.builder().email("").role(RoleType.ADMIN).language(LangType.JP).build();
 
         String cookieLang = null;
         if (moniqueLang != null && !moniqueLang.isEmpty()) {
             cookieLang = moniqueLang;
         }
-//        if(paramLang != null && !paramLang.isEmpty()){
-//            createLanguageCookie2(paramLang, response);
-//            cookieLang = paramLang;
-//        }
-
-        log.debug(messageSource.getMessage("our-story.major.heading", null, Locale.KOREAN));
-
         model.addAttribute("cookieLang", cookieLang);
         return "main";
     }
@@ -63,6 +54,13 @@ public class MainController {
         return "story/our-story";
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/celebrationMsg", method = RequestMethod.POST)
+    public String postCelebrationMessage(Model model) {
+        log.debug("celebrationMsg");
+
+        return "main";
+    }
 
 
     private void createLanguageCookie2(String language, HttpServletResponse response)

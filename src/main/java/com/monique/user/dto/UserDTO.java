@@ -20,6 +20,7 @@ public class UserDTO {
 
 
     private long id;
+
     @NotBlank
     private String userName;
     @NotBlank
@@ -36,4 +37,7 @@ public class UserDTO {
     @Max(2)
     private String luckyNumber;
 
+    private LocalDateTime createdDate;
+
+    private LocalDateTime modifiedDate;
 }

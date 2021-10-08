@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 @Service
 public class UserService {
 
-    private final UserRepository userRepository;
+    private final UserRepository userRepo;
 
     @Autowired
     ModelMapper modelMapper;
@@ -31,14 +31,14 @@ public class UserService {
     // 1.register user
     @Transactional
     public void postUser(UserDTO userDTO) {
-        userRepository.save(User.builder(userDTO).build());
+        userRepo.save(User.builder(userDTO).build());
     }
 
     // 2.search user by id,password for log-in
     @Transactional(readOnly = true)
     public UserDTO findUser(UserDTO userDTO) {
         User user = User.builder(userDTO).build();
-        User result = userRepository.findByEmailAndPassword(user.getEmail(), user.getPassword()).orElseThrow();
+        User result = userRepo.findByEmailAndPassword(user.getEmail(), user.getPassword()).orElseThrow();
 
         return modelMapper.map(result, UserDTO.class);
     }
@@ -47,13 +47,13 @@ public class UserService {
     @Transactional(readOnly = true)
     public List<UserDTO> getAllUserListExceptPassword()
     {
-        return userRepository.findAllUserForManagement().stream().map(p-> modelMapper.map(p,UserDTO.class)).collect(Collectors.toList());
+        return userRepo.findAllUserForManagement().stream().map(p-> modelMapper.map(p,UserDTO.class)).collect(Collectors.toList());
     }
 
     // 4. admin userList -> All user with paging
     public Page<User> getAllUserWithPaging(int startAt) {
         Pageable pageable = PageRequest.of(startAt, 10);
-        return  userRepository.findAll(pageable);
+        return  userRepo.findAll(pageable);
     }
 
 

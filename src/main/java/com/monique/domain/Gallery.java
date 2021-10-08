@@ -8,10 +8,10 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
-@DynamicInsert
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder(builderMethodName = "GalleryBuilder")
@@ -20,18 +20,22 @@ public class Gallery extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     @Column(length = 32, nullable = false)
     private String fileName;
 
-    @Column(nullable = false)
-    private String origFileName;
+    @Column(length = 256, nullable = false)
+    private String originalFileName;
 
-    @Column(nullable = false)
+    @Column(length = 256, nullable = false)
     private String filePath;
 
+    @Column(nullable = false)
     private Long fileSize;
+
+    @Column(length = 256)
+    private String thumbImg;
 
     @Column(nullable = false)
     @ColumnDefault("0")
@@ -40,13 +44,20 @@ public class Gallery extends BaseTimeEntity {
     @OneToMany(mappedBy = "gallery", fetch = FetchType.EAGER) // mappedBy is not has relation we are inverse foreign key
     private List<GalleryReply> galleryReply; //
 
-    public static Gallery.GalleryBuilder builder(GalleryDTO gallery) {
+    public static GalleryBuilder builder(GalleryDTO gallery) {
         return GalleryBuilder()
                 .id(gallery.getId())
                 .fileName(gallery.getFileName())
-                .origFileName(gallery.getOrigFileName())
+                .originalFileName(gallery.getOrigFileName())
                 .filePath(gallery.getFilePath())
                 .fileSize(gallery.getFileSize())
+                .thumbImg(gallery.getThumbImg())
                 .likes(gallery.getLikes());
     }
+
+    @PrePersist
+    public void prePersist(){
+        this.likes=0;
+    }
+
 }

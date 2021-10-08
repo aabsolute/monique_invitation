@@ -26,6 +26,7 @@
                                             <th>Email</th>
                                             <th>Role</th>
                                             <th>luckyNumber</th>
+                                            <th>createTime</th>
                                         </thead>
                                         <tbody>
                                             <tr th:each="user: ${pages}">
@@ -34,40 +35,41 @@
                                                 <td th:text="${user.email}"></td>
                                                 <td th:text="${user.role}"></td>
                                                 <td th:text="${user.luckyNumber}"></td>
+                                                <td th:text="${user.createdDate}"></td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                         </div>
-                        <th:block th:with="start=${(pages.number/maxPage) * maxPage + 1},
-                  end=(${(pages.totalPages == 0) ? 1 : (start + (maxPage - 1) < pages.totalPages ? start + (maxPage - 1) : pages.totalPages)})">
-                            <ul class="pagination justify-content-center">
-                                <li class="page-item" th:if="${start > 1}">
-                                    <a th:href="@{/admin/user-manager?(page=0)}"><i class="fas fa-angle-double-left"></i></a>
-                                </li>
-                                </li>
-
-                                <li class="page-item" th:if="${start > 1}">
-                                    <a th:href="@{/admin/user-manager?(page=${start - maxPage})}"><i class="fas fa-chevron-left"></i></a>
-                                </li>
-                                <li class="page-item" th:each="page: ${#numbers.sequence(start, end)}">
-                                    <a th:href="@{/admin/user-manager?(page=${page-1})}" th:text="${page}"></a>
-                                </li>
-                                </li>
-
-                                <li class="page-item" th:if="${end < pages.totalPages}">
-                                    <a th:href="@{/admin/user-manager?(page=${start + maxPage})}"><i class="fas fa-chevron-right"></i></a>
-                                </li>
-
-                                <li class="page-item" th:if="${end < pages.totalPages}">
-                                    <a th:href="@{/admin/user-manager?(page=${pages.totalPages-1})}"><i class="fas fa-angle-double-right"></i></a>
-                                </li>
-                                </li>
-                            </ul>
-                        </th:block>
                     </div>
                 </div>
+                <th:block th:with="start=${(pages.number/maxPage) * maxPage + 1},
+                end=(${(pages.totalPages == 0) ? 1 : (start + (maxPage - 1) lt pages.totalPages ? start + (maxPage - 1) : pages.totalPages)})">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item" th:if="${start > 1}">
+                            <a th:href="@{/admin/user-manager?(page=0)}"><i class="fas fa-angle-double-left"></i></a>
+                        </li>
+                        </li>
+
+                        <li class="page-item" th:if="${start > 1}">
+                            <a th:href="@{/admin/user-manager?(page=${start - maxPage})}"><i class="fas fa-chevron-left"></i></a>
+                        </li>
+                        <li class="page-item" th:each="page: ${#numbers.sequence(start, end)}">
+                            <a th:href="@{/admin/user-manager?(page=${page-1})}" th:text="${page}"></a>
+                        </li>
+                        </li>
+
+                        <li class="page-item" th:if="${end lt pages.totalPages}">
+                            <a th:href="@{/admin/user-manager?(page=${start + maxPage})}"><i class="fas fa-chevron-right"></i></a>
+                        </li>
+
+                        <li class="page-item" th:if="${end lt pages.totalPages}">
+                            <a th:href="@{/admin/user-manager?(page=${pages.totalPages-1})}"><i class="fas fa-angle-double-right"></i></a>
+                        </li>
+                        </li>
+                    </ul>
+                </th:block>
             </div>
         </div>
     </div>

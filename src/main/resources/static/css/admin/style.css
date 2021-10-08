@@ -1,3 +1,36 @@
 li {
     margin: 20px 0px;
 }
+
+.genric-btn.success {
+    color: #fff;
+    background: #4cd3e3;
+    border: 1px solid transparent;
+}
+
+
+/* line 241, ../../Arafath/CL/CL september/212. Wedding/HTML/scss/_elements.scss */
+
+.genric-btn.success:hover {
+    color: #4cd3e3;
+    border: 1px solid #4cd3e3;
+    background: #fff;
+}
+
+
+/* line 247, ../../Arafath/CL/CL september/212. Wedding/HTML/scss/_elements.scss */
+
+.genric-btn.success-border {
+    color: #4cd3e3;
+    border: 1px solid #4cd3e3;
+    background: #fff;
+}
+
+
+/* line 251, ../../Arafath/CL/CL september/212. Wedding/HTML/scss/_elements.scss */
+
+.genric-btn.success-border:hover {
+    color: #fff;
+    background: #4cd3e3;
+    border: 1px solid transparent;
+}

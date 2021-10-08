@@ -47,8 +47,10 @@ public class User extends BaseTimeEntity {
                 .photo(user.getPhoto())
                 .role(user.getRole())
                 .luckyNumber(user.getLuckyNumber());
+
     }
 
+    //for repository without password search
     public User(Long id, String email, String userName, RoleType role, String luckyNumber)
     {
         this.id = id;
@@ -57,6 +59,5 @@ public class User extends BaseTimeEntity {
         this.role = role;
         this.luckyNumber = luckyNumber;
     }
-
 
 }

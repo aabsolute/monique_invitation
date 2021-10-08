@@ -2,12 +2,7 @@ package com.monique.common.enums;
 
 import lombok.Getter;
 
-import javax.management.relation.Role;
-import java.awt.*;
 import java.util.EnumSet;
-import java.util.List;
-
-import static java.util.EnumSet.complementOf;
 
 @Getter
 public enum RoleType {

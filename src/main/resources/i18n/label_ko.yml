@@ -80,3 +80,8 @@ label:
       user-email: 이메일
       user-role: 권한
       user-luckyNumber: 행운의번호
+
+
+  common: 
+    check: 확인
+    detail: 상세보기

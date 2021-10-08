@@ -3,3 +3,5 @@ wedding:
   dateTime: 20220901120000
 cookie:
   expired-day: 7
+files:
+  directory: C:\upload

@@ -2,10 +2,12 @@ package com.monique.admin.dto;
 
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 @Data
 public class GalleryDTO {
 
-    private Long id;
+    private int id;
 
     private String fileName;
 
@@ -15,5 +17,11 @@ public class GalleryDTO {
 
     private Long fileSize;
 
+    private String thumbImg;
+
     private int likes;
+
+    private LocalDateTime createdDate;
+
+    private LocalDateTime modifiedDate;
 }
