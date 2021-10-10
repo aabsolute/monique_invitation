@@ -18,13 +18,15 @@ public class GalleryDTO {
 
     private String origFileName;
 
-    private String filePath;
+    private String galleryImg;
 
     private Long fileSize;
 
     private String thumbImg;
 
     private int likes;
+
+    private String imgDescription;
 
     private LocalDateTime createdDate;
 

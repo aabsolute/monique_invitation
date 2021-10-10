@@ -25,7 +25,7 @@ public class Gallery extends BaseTimeEntity {
     private String originalFileName;
 
     @Column(length = 256, nullable = false)
-    private String filePath;
+    private String galleryImg;
 
     @Column(nullable = false)
     private Long fileSize;
@@ -37,6 +37,9 @@ public class Gallery extends BaseTimeEntity {
     @ColumnDefault("0")
     private int likes;
 
+    @Column(length = 256)
+    private String imgDescription;
+
     @OneToMany(mappedBy = "gallery", fetch = FetchType.EAGER) // mappedBy is not has relation we are inverse foreign key
     private List<GalleryReply> galleryReply; //
 
@@ -45,10 +48,11 @@ public class Gallery extends BaseTimeEntity {
                 .id(gallery.getId())
                 .fileName(gallery.getFileName())
                 .originalFileName(gallery.getOrigFileName())
-                .filePath(gallery.getFilePath())
+                .galleryImg(gallery.getGalleryImg())
                 .fileSize(gallery.getFileSize())
                 .thumbImg(gallery.getThumbImg())
-                .likes(gallery.getLikes());
+                .likes(gallery.getLikes())
+                .imgDescription(gallery.getImgDescription());
     }
 
     @PrePersist

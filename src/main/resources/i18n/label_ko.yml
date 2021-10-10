@@ -80,8 +80,14 @@ label:
       user-email: 이메일
       user-role: 권한
       user-luckyNumber: 행운의번호
-
+    gallery: 
+      upload:
+        place-holder: 
+          description: 이미지의 설명을 넣어주세요
+        header:
+          description: 이미지 상세설명
 
   common: 
     check: 확인
     detail: 상세보기
+    register: 등록
