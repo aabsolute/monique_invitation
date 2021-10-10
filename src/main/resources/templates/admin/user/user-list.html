@@ -2,7 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="admin/fragments/admin-common :: html-admin-header">
-
 </head>
 
 <body>
@@ -29,7 +28,7 @@
                                             <th>createTime</th>
                                         </thead>
                                         <tbody>
-                                            <tr th:each="user: ${pages}">
+                                            <tr th:each="user: ${paging}">
                                                 <td th:text="${user.id}"></td>
                                                 <td th:text="${user.userName}"></td>
                                                 <td th:text="${user.email}"></td>
@@ -41,39 +40,47 @@
                                     </table>
                                 </div>
                             </div>
+                            <div th:if="${!paging.isEmpty()}">
+                                <nav th:with="
+                                            pageNumber = ${paging.pageable.pageNumber},
+                                            pageSize = ${paging.pageable.pageSize},
+                                            totalPages = ${paging.totalPages},
+                                            startPage = ${T(Math).floor(pageNumber / pageSize) * pageSize + 1},
+                                            tempEndPage = ${startPage + pageSize - 1},
+                                            endPage = (${tempEndPage > totalPages ? totalPages : tempEndPage})" aria-label="Page navigation" class="blog-pagination justify-content-center d-flex">
+                                    <ul class="pagination ">
+                                        <li th:classappend="${pageNumber + 1 <= pageSize + 1} ? 'disabled'" class="page-item">
+                                            <a class="page-link" th:href="@{/admin/user-manager}">
+                                                <i class="fas fa-angle-double-left"></i>
+                                            </a>
+                                        </li>
+                                        <li th:classappend="${paging.first} ? 'disabled'" class="page-item">
+                                            <a class="page-link" th:href="${paging.first} ? '#' : @{/admin/user-manager(page=${paging.number})}" aria-label="Previous">
+                                                <i class="fas fa-angle-left"></i>
+                                            </a>
+                                        </li>
+                                        <li th:each="page: ${#numbers.sequence(startPage, endPage)}" th:classappend="${page == paging.number + 1} ? 'active'" class="page-item">
+                                            <a th:text="${page}" class="page-link" th:href="@{/admin/user-manager(page=${page})}"></a>
+                                        </li>
+                                        <li th:classappend="${paging.last} ? 'disabled'" class="page-item">
+                                            <a class="page-link" th:href="${paging.last} ? '#' : @{/admin/user-manager(page=${paging.number + 2})}" aria-label="Next">
+                                                <i class="fas fa-angle-right"></i>
+                                            </a>
+                                        </li>
+                                        <li th:classappend=" ${T(Math).floor(totalPages/10)*10 <= startPage} ? 'disabled'" class="page-item">
+                                            <a class="page-link" th:href="@{/admin/user-manager(page=${totalPages})}">
+                                                <i class="fas fa-angle-double-right"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <th:block th:with="start=${(pages.number/maxPage) * maxPage + 1},
-                end=(${(pages.totalPages == 0) ? 1 : (start + (maxPage - 1) lt pages.totalPages ? start + (maxPage - 1) : pages.totalPages)})">
-                    <ul class="pagination justify-content-center">
-                        <li class="page-item" th:if="${start > 1}">
-                            <a th:href="@{/admin/user-manager?(page=0)}"><i class="fas fa-angle-double-left"></i></a>
-                        </li>
-                        </li>
-
-                        <li class="page-item" th:if="${start > 1}">
-                            <a th:href="@{/admin/user-manager?(page=${start - maxPage})}"><i class="fas fa-chevron-left"></i></a>
-                        </li>
-                        <li class="page-item" th:each="page: ${#numbers.sequence(start, end)}">
-                            <a th:href="@{/admin/user-manager?(page=${page-1})}" th:text="${page}"></a>
-                        </li>
-                        </li>
-
-                        <li class="page-item" th:if="${end lt pages.totalPages}">
-                            <a th:href="@{/admin/user-manager?(page=${start + maxPage})}"><i class="fas fa-chevron-right"></i></a>
-                        </li>
-
-                        <li class="page-item" th:if="${end lt pages.totalPages}">
-                            <a th:href="@{/admin/user-manager?(page=${pages.totalPages-1})}"><i class="fas fa-angle-double-right"></i></a>
-                        </li>
-                        </li>
-                    </ul>
-                </th:block>
             </div>
         </div>
     </div>
-
     <th:block th:include="admin/fragments/admin-common :: main-admin-footer"></th:block>
 </body>
 

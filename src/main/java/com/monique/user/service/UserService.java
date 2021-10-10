@@ -1,6 +1,9 @@
 package com.monique.user.service;
 
+import com.monique.common.enums.CommonCode;
+import com.monique.domain.Gallery;
 import com.monique.domain.User;
+import com.monique.gallery.dto.GalleryDTO;
 import com.monique.user.dto.UserDTO;
 import com.monique.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,10 +28,6 @@ public class UserService {
     @Autowired
     ModelMapper modelMapper;
 
-    // 좋음
-//    Optional<Member> member = ...;
-//return member.orElseGet(Member::new);  // member에 값이 없을 때만 new Member()가 실행됨
-
     // 1.register user
     @Transactional
     public void postUser(UserDTO userDTO) {
@@ -36,7 +36,8 @@ public class UserService {
 
     // 2.search user by id,password for log-in
     @Transactional(readOnly = true)
-    public UserDTO findUser(UserDTO userDTO) {
+    public UserDTO findUser(UserDTO userDTO)
+    {
         User user = User.builder(userDTO).build();
         User result = userRepo.findByEmailAndPassword(user.getEmail(), user.getPassword()).orElseThrow();
 
@@ -50,10 +51,11 @@ public class UserService {
         return userRepo.findAllUserForManagement().stream().map(p-> modelMapper.map(p,UserDTO.class)).collect(Collectors.toList());
     }
 
-    // 4. admin userList -> All user with paging
-    public Page<User> getAllUserWithPaging(int startAt) {
-        Pageable pageable = PageRequest.of(startAt, 10);
-        return  userRepo.findAll(pageable);
+
+    // 4. admin userList -> All user with paging order by createdDATE
+    public Page<User> getAllUserWithPaging(int pageNum)
+    {
+        return userRepo.findAll(PageRequest.of(pageNum==0? 0:pageNum-1,CommonCode.PAGE_POST_COUNT, Sort.by(Sort.Direction.DESC, "createdDate")));
     }
 
 

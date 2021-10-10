@@ -1,11 +1,12 @@
 package com.monique.admin.controller;
 
+import com.monique.common.enums.CommonCode;
 import com.monique.domain.Gallery;
 import com.monique.domain.User;
 import com.monique.gallery.dto.GalleryDTO;
 import com.monique.gallery.service.GalleryService;
-import com.monique.user.service.UserService;
 import com.monique.user.dto.UserDTO;
+import com.monique.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -37,8 +38,7 @@ public class AdminContorller {
 
         Page<User> userList = userService.getAllUserWithPaging(page);
 
-        model.addAttribute("pages", userList );
-        model.addAttribute("maxPage", 5);
+        model.addAttribute("paging", userList );
 
         return "admin/user/user-list";
     }
@@ -46,10 +46,9 @@ public class AdminContorller {
     @GetMapping("gallery-manager")
     public String getAllGalleryManager(Model model, @RequestParam(value = "page", defaultValue = "0") int page){
 
-        Page<Gallery> userList = galleryService.getAllGalleryWithPaging(page);
+        Page<Gallery> galleryList = galleryService.getAllGalleryWithPaging(page);
 
-        model.addAttribute("pages", userList );
-        model.addAttribute("maxPage", 5);
+        model.addAttribute("paging", galleryList );
 
         return "admin/gallery/gallery-list";
     }

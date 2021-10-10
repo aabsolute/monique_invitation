@@ -1,14 +1,10 @@
 package com.monique.domain;
 
-import com.monique.admin.dto.GalleryDTO;
-import com.monique.user.dto.UserDTO;
+import com.monique.gallery.dto.GalleryDTO;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
