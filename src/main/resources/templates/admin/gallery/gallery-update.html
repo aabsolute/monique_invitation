@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="admin/fragments/admin-common :: html-admin-header">
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <div th:replace="admin/fragments/admin-common :: main-admin-sidebar"></div>
+        <div class="main-panel">
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="card">
+                                <div class="header">
+                                    <h4 class="title">Edit Profile</h4>
+                                </div>
+                                <div class="content">
+                                    <div class="col-md-4">
+                                        <div class="card card-user">
+                                            <div class="select_img">
+                                                <img src="" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <form th:action="@{/admin/gallery-upload}" autocomplete="off" enctype="multipart/form-data" method="post" th:object="${registerGallery}">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label for="weddingImg">Image</label>
+                                                <input type="file" id="weddingImg" name="file" />
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label th:text="#{label.admin.gallery.upload.header.description}">About Me</label>
+                                                    <textarea rows="5" class="form-control" id="imgDescription" name="imgDescription" th:placeholder="#{label.admin.gallery.upload.place-holder.description}"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-info btn-fill pull-right" th:text="#{label.common.register}">regist Profile</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <th:block th:include="admin/fragments/admin-common :: main-admin-footer"></th:block>
+    <script>
+        $("#weddingImg")
+            .change(
+                function() {
+                    if (this.files && this.files[0]) {
+                        var reader = new FileReader;
+                        reader.onload = function(
+                            data) {
+                            $(".select_img img")
+                                .attr(
+                                    "src",
+                                    data.target.result)
+                                .width(500);
+                        }
+                        reader
+                            .readAsDataURL(this.files[0]);
+                    }
+                });
+    </script>
+</body>
+
+</html>

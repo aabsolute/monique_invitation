@@ -6,6 +6,7 @@ import com.monique.gallery.dto.GalleryDTO;
 import com.monique.gallery.service.GalleryService;
 import com.monique.user.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.util.List;
 
@@ -26,6 +28,9 @@ public class AdminController {
     private final UserService userService;
 
     private final GalleryService galleryService;
+
+    @Value("${files.directory}")
+    private String imgDir;
 
     @GetMapping("main")
     public String getDashBoardmain(){
@@ -60,16 +65,16 @@ public class AdminController {
     }
 
     @PostMapping("gallery-upload")
-    public String postGalleryUpdate(Model model, GalleryDTO galleryDTO, MultipartFile file) throws Exception {
+    public String postGalleryUpdate(Model model, GalleryDTO galleryDTO, MultipartFile file, HttpServletRequest req) throws Exception {
 
+        //String uploadPath = req.getSession().getServletContext().getRealPath("/").concat("resources");
 
-
-        String imgUploadPath = FileUtils.savePath + File.separator + "imgUpload";
+        String imgUploadPath = imgDir + File.separator + "imgUpload";
         String ymdPath = FileUtils.calcPath(imgUploadPath);
         String fileName = null;
 
         if (file.getOriginalFilename() != null && file.getOriginalFilename() != "") {
-            fileName = FileUtils.fileUpload(file.getOriginalFilename(), file.getBytes(), ymdPath);
+            fileName = FileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath);
 
             galleryDTO.setFileName(fileName);
             galleryDTO.setOrigFileName(file.getOriginalFilename());
@@ -85,7 +90,7 @@ public class AdminController {
 
         galleryService.postGalleryInfo(galleryDTO);
 
-        return "admin/gallery/gallery-list";
+        return "redirect:admin/main";
     }
 
 }

@@ -13,27 +13,28 @@ import java.util.UUID;
 @Component
 public class FileUtils {
 
-    static final int THUMB_WIDTH = 300;
-    static final int THUMB_HEIGHT = 300;
+    static final int THUMB_WIDTH = 200;
+    static final int THUMB_HEIGHT = 200;
 
-    public static String savePath;
+//    public static String savePath;
+//
+//    @Value("${files.directory}")
+//    public void setKey(String path) {
+//        savePath = path;
+//    }
 
-    @Value("${files.directory}")
-    public void setKey(String path) {
-        savePath = path;
-    }
 
 
-
-    public static String fileUpload(String fileName, byte[] fileData, String ymdPath)
+    public static String fileUpload(String savePath, String fileName, byte[] fileData, String ymdPath)
             throws Exception {
 
         UUID uid = UUID.randomUUID();
-
         String newFileName = uid + "_" + fileName;
-        String imgPath = savePath + ymdPath;
+        String imgPath = savePath + File.separator + ymdPath;
 
         File target = new File(imgPath, newFileName);
+        target.getParentFile().mkdirs();
+
         FileCopyUtils.copy(fileData, target);
 
         String thumbFileName = "s_" + newFileName;

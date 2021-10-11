@@ -18,7 +18,7 @@ public class Gallery extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(length = 32, nullable = false)
+    @Column(length = 64, nullable = false)
     private String fileName;
 
     @Column(length = 256, nullable = false)
@@ -27,7 +27,7 @@ public class Gallery extends BaseTimeEntity {
     @Column(length = 256, nullable = false)
     private String galleryImg;
 
-    @Column(nullable = false)
+    @ColumnDefault("0")
     private Long fileSize;
 
     @Column(length = 256)
