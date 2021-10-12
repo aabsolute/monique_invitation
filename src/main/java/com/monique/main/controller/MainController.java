@@ -2,13 +2,18 @@ package com.monique.main.controller;
 
 import com.monique.common.enums.LangType;
 import com.monique.common.enums.RoleType;
+import com.monique.domain.Celebration;
+import com.monique.domain.Gallery;
+import com.monique.main.dto.CelebrationDTO;
 import com.monique.main.dto.UserSession;
+import com.monique.main.service.CelebrationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.catalina.startup.UserConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -32,18 +37,24 @@ public class MainController {
 
     private final MessageSource messageSource;
 
+    private final CelebrationService cbtService;
+
     @Value("${cookie.expired-day}")
     private int cookieExpiredDay;
 
     @GetMapping("/")
     public String getMain(Model model, HttpServletRequest request, HttpServletResponse response,
-                          @CookieValue(value = "MONIQUE-LANG", required = false) String moniqueLang
+                          @CookieValue(value = "MONIQUE-LANG", required = false) String moniqueLang,@RequestParam(value = "page", defaultValue = "0") int page
     ) {
 
         String cookieLang = null;
         if (moniqueLang != null && !moniqueLang.isEmpty()) {
             cookieLang = moniqueLang;
         }
+
+        Page<Celebration> cbtList = cbtService.getAllCelebrationWithPaging(page);
+
+        model.addAttribute("paging", cbtList );
         model.addAttribute("cookieLang", cookieLang);
         return "main";
     }
@@ -55,10 +66,12 @@ public class MainController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/celebrationMsg", method = RequestMethod.POST)
-    public String postCelebrationMessage(Model model) {
-        log.debug("celebrationMsg");
+    @PostMapping(value = "/cbt-regist")
+    public String postCelebrationMessage(Model model, @ModelAttribute CelebrationDTO cbtDTO,HttpServletRequest request) {
+        log.debug("cbtMsg");
 
+        cbtService.postCelebration(cbtDTO);
+        // cbt DTO만 넣자
         return "main";
     }
 
@@ -72,9 +85,5 @@ public class MainController {
         response.addCookie(myCookie);
     }
 
-    @GetMapping("/index")
-    public void getIndex(Model model){
-        log.info("get Index");
-    }
 
 }

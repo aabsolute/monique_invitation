@@ -26,8 +26,6 @@ public class GalleryService {
 
     private final GalleryRepository galleryRepo;
 
-    private final int PAGE_POST_COUNT= 10;
-
     @Autowired
     ModelMapper modelMapper;
 

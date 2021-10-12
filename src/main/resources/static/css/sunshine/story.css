@@ -888,3 +888,9 @@
     border-bottom: 1px dotted orange;
     margin-top: 1em;
 }
+
+.comment-padding {
+    padding-top: 120px;
+    padding-bottom: 120px;
+    padding-left: 200px;
+}

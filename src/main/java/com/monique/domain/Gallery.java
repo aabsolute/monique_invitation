@@ -9,13 +9,14 @@ import java.util.List;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder(builderMethodName = "GalleryBuilder")
 @Entity
 public class Gallery extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="gallery_id", updatable = false)
     private int id;
 
     @Column(length = 64, nullable = false)

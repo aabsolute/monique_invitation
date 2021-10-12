@@ -7,6 +7,7 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -17,7 +18,7 @@ public class User extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(updatable = false)
+    @Column(name="user_id", updatable = false)
     private long id;
 
     @Column(length = 32, nullable = false, unique=true)
@@ -37,6 +38,7 @@ public class User extends BaseTimeEntity {
 
     @Column(length = 4)
     private String luckyNumber;
+
 
     public static UserBuilder builder(UserDTO user) {
         return UserBuilder()

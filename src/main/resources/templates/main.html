@@ -9,128 +9,119 @@
 <body>
     <header th:replace="/fragments/common-header :: main-header"></header>
     <th:block th:include="/fragments/common-header :: main-slider"></th:block>
+    <section class="blog_area single-post-area section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="comments-area">
+                        <h4>05 Comments</h4>
+                        <div class="comment-list">
+                            <div class="single-comment justify-content-between d-flex">
+                                <div class="user justify-content-between d-flex">
+                                    <div class="desc" th:each="celebration: ${paging}">
+                                        <p class="comment" th:text="${celebration.comment}">Comment</p>
+                                        <div class="d-flex justify-content-between">
+                                            <div class="d-flex align-items-center">
+                                                <h5>
+                                                    <p th:text="${celebration.name}">UserName</p>
+                                                </h5>
+                                                <p class="date" th:text="${celebration.modifiedDate}">December 4, 2017 at 3:12 pm </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div th:if="${!paging.isEmpty()}">
+                            <nav th:with="
+                                        pageNumber = ${paging.pageable.pageNumber},
+                                        pageSize = ${paging.pageable.pageSize},
+                                        totalPages = ${paging.totalPages},
+                                        startPage = ${T(Math).floor(pageNumber / pageSize) * pageSize + 1},
+                                        tempEndPage = ${startPage + pageSize - 1},
+                                        endPage = (${tempEndPage > totalPages ? totalPages : tempEndPage})" aria-label="Page navigation" class="blog-pagination justify-content-center d-flex">
+                                <ul class="pagination ">
+                                    <li th:classappend="${pageNumber + 1 <= pageSize + 1} ? 'disabled'" class="page-item">
+                                        <a class="page-link" th:href="@{/admin/user-manager}">
+                                            <i class="fas fa-angle-double-left"></i>
+                                        </a>
+                                    </li>
+                                    <li th:classappend="${paging.first} ? 'disabled'" class="page-item">
+                                        <a class="page-link" th:href="${paging.first} ? '#' : @{/admin/user-manager(page=${paging.number})}" aria-label="Previous">
+                                            <i class="fas fa-angle-left"></i>
+                                        </a>
+                                    </li>
+                                    <li th:each="page: ${#numbers.sequence(startPage, endPage)}" th:classappend="${page == paging.number + 1} ? 'active'" class="page-item">
+                                        <a th:text="${page}" class="page-link" th:href="@{/admin/user-manager(page=${page})}"></a>
+                                    </li>
+                                    <li th:classappend="${paging.last} ? 'disabled'" class="page-item">
+                                        <a class="page-link" th:href="${paging.last} ? '#' : @{/admin/user-manager(page=${paging.number + 2})}" aria-label="Next">
+                                            <i class="fas fa-angle-right"></i>
+                                        </a>
+                                    </li>
+                                    <li th:classappend=" ${T(Math).floor(totalPages/10)*10 <= startPage} ? 'disabled'" class="page-item">
+                                        <a class="page-link" th:href="@{/admin/user-manager(page=${totalPages})}">
+                                            <i class="fas fa-angle-double-right"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <div class="comment-form">
+                            <h4 th:text="#{label.celebration.leave-message}">Leave a Reply</h4>
+                            <form class="form-contact comment_form" th:action="@{/celebrationMsg}" id="commentForm">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="2" placeholder="#{label.celebration.place-holer.comment}"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <input class="form-control" name="name" id="name" type="text" th:placeholder="#{label.celebration.place-holer.name}">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <button type="button" class="button button-contactForm btn_1 boxed-btn" onclick="dataSend()">Send Message</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
 
-    <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            <div class="comments-area">
-                <h4>05 Comments</h4>
-                <div class="comment-list">
-                    <div class="single-comment justify-content-between d-flex">
-                        <div class="user justify-content-between d-flex">
-                            <div class="thumb">
-                                <img src="assets/img/comment/comment_1.png" alt="">
-                            </div>
-                            <div class="desc">
-                                <p class="comment">
-                                    Multiply sea night grass fourth day sea lesser rule open subdue female fill which them Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
-                                </p>
-                                <div class="d-flex justify-content-between">
-                                    <div class="d-flex align-items-center">
-                                        <h5>
-                                            <a href="#">Emilly Blunt</a>
-                                        </h5>
-                                        <p class="date">December 4, 2017 at 3:12 pm </p>
-                                    </div>
-                                    <div class="reply-btn">
-                                        <a href="#" class="btn-reply text-uppercase">reply</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
+
                 </div>
-                <div class="comment-list">
-                    <div class="single-comment justify-content-between d-flex">
-                        <div class="user justify-content-between d-flex">
-                            <div class="thumb">
-                                <img src="assets/img/comment/comment_2.png" alt="">
-                            </div>
-                            <div class="desc">
-                                <p class="comment">
-                                    Multiply sea night grass fourth day sea lesser rule open subdue female fill which them Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
-                                </p>
-                                <div class="d-flex justify-content-between">
-                                    <div class="d-flex align-items-center">
-                                        <h5>
-                                            <a href="#">Emilly Blunt</a>
-                                        </h5>
-                                        <p class="date">December 4, 2017 at 3:12 pm </p>
-                                    </div>
-                                    <div class="reply-btn">
-                                        <a href="#" class="btn-reply text-uppercase">reply</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="comment-list">
-                    <div class="single-comment justify-content-between d-flex">
-                        <div class="user justify-content-between d-flex">
-                            <div class="thumb">
-                                <img src="assets/img/comment/comment_3.png" alt="">
-                            </div>
-                            <div class="desc">
-                                <p class="comment">
-                                    Multiply sea night grass fourth day sea lesser rule open subdue female fill which them Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
-                                </p>
-                                <div class="d-flex justify-content-between">
-                                    <div class="d-flex align-items-center">
-                                        <h5>
-                                            <a href="#">Emilly Blunt</a>
-                                        </h5>
-                                        <p class="date">December 4, 2017 at 3:12 pm </p>
-                                    </div>
-                                    <div class="reply-btn">
-                                        <a href="#" class="btn-reply text-uppercase">reply</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="comment-form">
-                <h4>Leave a Reply</h4>
-                <form class="form-contact comment_form" action="#" id="commentForm">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="form-group">
-                                <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9" placeholder="Write Comment"></textarea>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <input class="form-control" name="name" id="name" type="text" placeholder="Name">
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <input class="form-control" name="email" id="email" type="email" placeholder="Email">
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="form-group">
-                                <input class="form-control" name="website" id="website" type="text" placeholder="Website">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="button button-contactForm btn_1 boxed-btn">Send Message</button>
-                    </div>
-                </form>
             </div>
         </div>
-
-
-
-    </div>
-    </div>
-
+    </section>
 
 
     <!-- script-->
-    <th:block th:include="/fragments/common-footer :: html-main-footer"></th:block>
+    <th:block th:include="/fragments/common-footer :: html-main-footer "></th:block>
+    <script src="//cdn.ckeditor.com/4.16.2/basic/ckeditor.js ">
+    </script>
+    <script>
+        CKEDITOR.replace('comment');
+    </script>
+    <script>
+        function dataSend() {
+
+            var coment = $("#comment").val();
+            var name = $("#name").val();
+
+            $.ajax({
+                url: "/cbt-regist",
+                data: messageDTO,
+                type: "POST",
+            }).done(function(fragment) {
+                $("#resultDiv").replaceWith(fragment);
+            });
+        }
+    </script>
+
 </body>
 
 </html>

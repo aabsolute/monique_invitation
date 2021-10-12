@@ -26,7 +26,7 @@ public class Board extends BaseTimeEntity{
     private int count;
 
     @ManyToOne(fetch = FetchType.EAGER) // many board to one user
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "user_Id")
     private User user; //db는 관계형이지만 자바에서는 object를 사용할 수 있다
 
     @OneToMany(mappedBy = "board", fetch = FetchType.EAGER) // mappedBy is not has relation we are inverse foreign key
