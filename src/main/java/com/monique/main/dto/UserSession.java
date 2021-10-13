@@ -21,6 +21,8 @@ public class UserSession implements Serializable{
 
     private String email;
 
+    private String name;
+
     private RoleType role;
 
     private LangType language;
@@ -28,6 +30,7 @@ public class UserSession implements Serializable{
     public static UserSessionBuilder builder(UserDTO user, Locale locale) {
         return UserSessionBuilder()
                 .email(user.getEmail())
+                .name(user.getUserName())
                 .role(user.getRole())
                 .language(LangType.setLangTypeByLocale(locale));
     }

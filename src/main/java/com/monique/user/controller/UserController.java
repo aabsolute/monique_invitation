@@ -5,6 +5,7 @@ import com.monique.user.service.UserService;
 import com.monique.user.dto.UserDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -56,10 +57,14 @@ public class UserController {
     }
 
     @PostMapping("/sign-up")
-    public String postSignUp(Model model, @ModelAttribute UserDTO userDTO){
+    public String postSignUp(Model model, @ModelAttribute UserDTO userDTO, HttpServletRequest request, Locale locale){
 
         if(userDTO != null)
             userService.postUser(userDTO);
+
+        HttpSession hss =  request.getSession();
+        UserSession uss = UserSession.builder(userDTO, locale).build();
+        hss.setAttribute("userSession", uss);
 
         log.debug(" @post SIGN-UP");
         return "redirect:/";

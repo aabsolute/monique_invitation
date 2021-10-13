@@ -30,14 +30,32 @@
                                         </div>
                                         <form th:action="@{/sign-up}" method="post" th:object="${registerUser}">
                                             <div class="row">
+                                                <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger pb-0">
+                                                    <p th:text="#{label.sign-up.error.check}">Please Correct Errors Below</p>
+                                                </div>
                                                 <div class="col-xl-12">
                                                     <input class="form-control" type="email" th:field="*{email}" th:placeholder="#{label.sign-up.place-holer.email}" required>
+                                                    <span class="small form-text text-muted invalid-feedback" th:if="${#fields.hasErrors('email')}">
+                                                        <ul>
+                                                          <li th:each="err : ${#fields.errors('email')}" th:text="#{err}"></li>
+                                                        </ul>
+                                                    </span>
                                                 </div>
                                                 <div class="col-xl-12">
                                                     <input class="form-control" type="password" th:field="*{password}" th:placeholder="#{label.sign-up.place-holer.password}" required>
+                                                    <span class="small form-text text-muted invalid-feedback" th:if="${#fields.hasErrors('password')}">
+                                                        <ul>
+                                                          <li th:each="err : ${#fields.errors('password')}" th:text="#{err}"></li>
+                                                        </ul>
+                                                    </span>
                                                 </div>
                                                 <div class="col-xl-12">
                                                     <input class="form-control" type="password" th:field="*{passwordCheck}" th:placeholder="#{label.sign-up.place-holer.password-check}" required>
+                                                    <span id="samepassword" class="small form-text text-muted invalid-feedback" th:if="${#fields.hasErrors('passwordCheck')}">
+                                                        <ul>
+                                                          <li th:each="err : ${#fields.errors('passwordCheck')}" th:text="#{err}"></li>
+                                                        </ul>
+                                                    </span>
                                                 </div>
                                                 <div class="col-xl-12">
                                                     <input class="form-control" type="text" th:field="*{userName}" th:placeholder="#{label.sign-up.place-holer.name}" required>
