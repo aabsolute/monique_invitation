@@ -66,7 +66,7 @@ public class UserController {
         UserSession uss = UserSession.builder(userDTO, locale).build();
         hss.setAttribute("userSession", uss);
 
-        log.debug(" @post SIGN-UP");
+        log.debug(" @post  SIGN-UP");
         return "redirect:/";
     }
 
