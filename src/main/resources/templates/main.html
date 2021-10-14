@@ -4,6 +4,8 @@
 <head>
     <!-- script-->
     <th:block th:include="/fragments/common-header :: html-main-header"></th:block>
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -14,12 +16,12 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="comments-area">
-                        <h4>05 Comments</h4>
-                        <div class="comment-list">
+                        <h4 th:text="|${totalComment}, comment|"></h4>
+                        <div class="comment-list" th:each="celebration: ${paging}">
                             <div class="single-comment justify-content-between d-flex">
                                 <div class="user justify-content-between d-flex">
-                                    <div class="desc" th:each="celebration: ${paging}">
-                                        <p class="comment" th:text="${celebration.comment}">Comment</p>
+                                    <div id="commentList" class="desc">
+                                        <div class="comment" th:text="${celebration.comment}">Comment</div>
                                         <div class="d-flex justify-content-between">
                                             <div class="d-flex align-items-center">
                                                 <h5>
@@ -69,23 +71,42 @@
                         </div>
                         <div class="comment-form">
                             <h4 th:text="#{label.celebration.leave-message}">Leave a Reply</h4>
-                            <form class="form-contact comment_form" th:action="@{/celebrationMsg}" id="commentForm">
+                            <form class="form-contact comment_form" th:action="@{/celebrationMsg}">
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="2" placeholder="#{label.celebration.place-holer.comment}"></textarea>
+                                            <textarea id="summernote" name="editordata" cols="30" rows="2" th:placeholder="#{label.celebration.place-holer.comment}"></textarea>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <input class="form-control" name="name" id="name" type="text" th:placeholder="#{label.celebration.place-holer.name}">
+                                    <th:block th:if="${session.userSession} eq null">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <input class="form-control" name="name" id="name" type="text" th:placeholder="#{label.celebration.place-holer.name}">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <button type="button" class="button button-contactForm btn_1 boxed-btn" onclick="dataSend()">Send Message</button>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <input class="form-control" name="passkey" id="passkey" type="text" th:placeholder="#{label.celebration.place-holer.passkey}">
+                                            </div>
                                         </div>
-                                    </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <button type="button" class="button button-contactForm btn_1 boxed-btn" onclick="dataSend()">Send Message</button>
+                                            </div>
+                                        </div>
+                                    </th:block>
+                                    <th:block th:unless="${session.userSession} eq null">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <input class="form-control" name="passkey" id="passkey" type="text" th:placeholder="#{label.celebration.place-holer.passkey}">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <button type="button" class="button button-contactForm btn_1 boxed-btn" onclick="dataSend()">Send Message</button>
+                                            </div>
+                                        </div>
+                                    </th:block>
                                 </div>
                             </form>
                         </div>
@@ -101,23 +122,63 @@
 
     <!-- script-->
     <th:block th:include="/fragments/common-footer :: html-main-footer "></th:block>
-    <script src="//cdn.ckeditor.com/4.16.2/basic/ckeditor.js ">
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
     <script>
-        CKEDITOR.replace('comment');
+        $(document).ready(function() {
+            //여기 아래 부분
+            $('#summernote').summernote({
+                height: 150,
+                toolbar: [
+                    ['fontname', ['fontname']],
+                    ['fontsize', ['fontsize']],
+                    ['style', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
+                    ['color', ['forecolor', 'color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['height', ['height']]
+                ],
+                fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', '맑은 고딕', '궁서', '굴림', '돋음체', '바탕체'],
+                fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '28', '30', '36', '50', '72']
+            });
+        });
     </script>
     <script>
         function dataSend() {
-
-            var coment = $("#comment").val();
+            alert("in");
+            var coment = $('#summernote').summernote('code');
             var name = $("#name").val();
-
+            var pass = $("#passkey").val();
+            alert(coment);
+            alert(name);
+            alert(pass);
             $.ajax({
-                url: "/cbt-regist",
-                data: messageDTO,
-                type: "POST",
-            }).done(function(fragment) {
-                $("#resultDiv").replaceWith(fragment);
+                type: 'post',
+                url: '/cbt-register',
+                data: {
+                    'comment': coment,
+                    'passkey': pass,
+                    'name': name
+                },
+                success: function(jdata) {
+                    if (jdata == "") {
+                        return;
+                    }
+                    var encodeData = decodeString(jdata);
+                    var result = JSON.parse(encodeData);
+
+                    var firstList = $("#commentList").children().first();
+                    $("#commentList").prepend(
+                        '<p class="comment">' +
+                        result.comment +
+                        '</p>' +
+                        '<div class="d-flex justify-content-between">' +
+                        '<div class="d-flex align-items-center">' +
+                        '<h5><p>' +
+                        result.userName +
+                        '</p></h5><p class="date">' +
+                        result.createdDate +
+                        '</p></div></div>');
+
+                }
             });
         }
     </script>

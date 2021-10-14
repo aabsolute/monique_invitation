@@ -26,12 +26,11 @@ public class CelebrationService {
         return cbtRepo.findAll(PageRequest.of(pageNum==0? 0:pageNum-1, CommonCode.PAGE_POST_COUNT, Sort.by(Sort.Direction.DESC, "createdDate")));
     }
 
-    // 2. Celebration regist
+    // 2. Celebration register
     @Transactional
     public void postCelebration(CelebrationDTO cbtDTO)
     {
         cbtRepo.save(Celebration.builder(cbtDTO).build());
     }
-
 
 }

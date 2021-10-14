@@ -5,6 +5,7 @@ import com.monique.main.dto.CelebrationDTO;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
 import java.util.List;
@@ -33,7 +34,11 @@ public class Celebration extends BaseTimeEntity {
 
     @Convert(converter=BooleanToStringConverter.class)
     @Column(name="delete_yn", length=1)
-    private String delete_yn;
+    private Boolean delete_yn;
+
+    //@Formual("(select count(1) from board_comment bc where bc.board_id = id)")
+    @Formula("(select count(*) from Celebration cbt where cbt.delete_yn = 'N')")
+    private int totalCommentCount;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_Id")
@@ -48,7 +53,7 @@ public class Celebration extends BaseTimeEntity {
     }
     @PrePersist
     public void prePersist(){
-        this.delete_yn="N";
+        this.delete_yn= false;
     }
 
 }

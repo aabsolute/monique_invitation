@@ -1,5 +1,6 @@
 package com.monique.main.controller;
 
+import com.google.gson.Gson;
 import com.monique.common.enums.LangType;
 import com.monique.common.enums.RoleType;
 import com.monique.domain.Celebration;
@@ -39,6 +40,9 @@ public class MainController {
 
     private final CelebrationService cbtService;
 
+    @Autowired
+    Gson gson;
+
     @Value("${cookie.expired-day}")
     private int cookieExpiredDay;
 
@@ -55,6 +59,7 @@ public class MainController {
         Page<Celebration> cbtList = cbtService.getAllCelebrationWithPaging(page);
 
         model.addAttribute("paging", cbtList );
+        model.addAttribute("totalComment", cbtList.getTotalElements());
         model.addAttribute("cookieLang", cookieLang);
         return "main";
     }
@@ -66,13 +71,17 @@ public class MainController {
     }
 
     @ResponseBody
-    @PostMapping(value = "/cbt-regist")
+    @PostMapping(value = "/cbt-register")
     public String postCelebrationMessage(Model model, @ModelAttribute CelebrationDTO cbtDTO,HttpServletRequest request) {
         log.debug("cbtMsg");
 
-        cbtService.postCelebration(cbtDTO);
-        // cbt DTO만 넣자
-        return "main";
+        if(cbtDTO != null)
+            cbtService.postCelebration(cbtDTO);
+        else
+            new Exception();
+
+        String jsonString = gson.toJson(cbtDTO);
+        return jsonString;
     }
 
 

@@ -18,4 +18,7 @@ public class CelebrationDTO {
 
     private String delete_yn;
 
+    private int totalComment;
+
+
 }

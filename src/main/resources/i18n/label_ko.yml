@@ -24,13 +24,12 @@ label:
         korean: 한국어를 선택합니다.
         japanese: 日本語を選択します。
         english: Select English
-    celebration: 
-      leave-message: 축하메시지를 남겨주세요
-      place-holer: 
-        comment: 축하메시지를 남겨주세요
-        name: 성함을 적어주세요
-
-
+  celebration: 
+    leave-message: 축하메시지를 남겨주세요
+    place-holer: 
+      comment: 축하메시지를 남겨주세요
+      name: 성함을 적어주세요
+      passkey: 비밀번호를 입력하세요
 
   our-story:
     heading: 우리.사랑.이야기

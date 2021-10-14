@@ -8,6 +8,40 @@
     <th:block th:include="/fragments/common-header :: html-main-header"></th:block>
     <link rel="stylesheet" th:href="@{/css/sunshine/story.css}">
 
+    <!-- <script>
+        function script_main(form) {
+            alert("in tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt");
+            if (form.email.value = "") {
+                alert("공백 안되네!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                return false;
+            }
+
+            if (form.email.value.length < 2) {
+                alert("1자 안됨555555555555555555555555555555555555555555555555");
+                return false;
+            }
+
+            if (form.email.password.length < 3) {
+                alert("password under 333333333333333333333333333333333333333333333333333333333333333");
+                return false;
+            }
+
+            return (confirm("are you ok?", form.email.value));
+        }
+
+        function isNumeric(str) {
+            for (var i = 0; i < str.length; i++) {
+                var c = str.charAt(i);
+                if (c < '0' || c > '9') {
+                    return false;
+                }
+            }
+        }
+    </script> 
+
+onsubmit="return script_main(document.TQW);"
+-->
+
 </head>
 
 <body>
@@ -32,7 +66,7 @@
                                         <div class="form_heading text-center">
                                             <h3 th:text="#{label.sign-in.title}">Sign-in</h3>
                                         </div>
-                                        <form name="TQW" th:action="@{/sign-in}" method="post" onsubmit="return script_main(document.TQW);">
+                                        <form name="TQW" th:action="@{/sign-in}" method="post">
                                             <div class="row">
                                                 <div class="col-xl-12">
                                                     <input class="form-control" type="email" id="email" name="email" th:placeholder="#{label.sign-up.place-holer.email}">
