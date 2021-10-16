@@ -9,6 +9,11 @@
 </head>
 
 <body>
+    <div id="preloader">
+        <div class="preloader pulse">
+            <i class="fas fa-heartbeat" aria-hidden="true"></i>
+        </div>
+    </div>
     <header th:replace="/fragments/common-header :: main-header"></header>
     <th:block th:include="/fragments/common-header :: main-slider"></th:block>
     <section class="blog_area single-post-area section-padding">
@@ -18,18 +23,18 @@
                     <div class="comments-area">
                         <h4 th:text="|${totalComment}, comment|"></h4>
                         <div class="comment-list" th:each="celebration: ${paging}">
-                            <div class="single-comment justify-content-between d-flex">
+                            <div id="commentsList" class="single-comment border-top">
                                 <div class="user justify-content-between d-flex">
-                                    <div id="commentList" class="desc">
-                                        <div class="comment" th:text="${celebration.comment}">Comment</div>
-                                        <div class="d-flex justify-content-between">
-                                            <div class="d-flex align-items-center">
-                                                <h5>
-                                                    <p th:text="${celebration.name}">UserName</p>
-                                                </h5>
-                                                <p class="date" th:text="${celebration.modifiedDate}">December 4, 2017 at 3:12 pm </p>
-                                            </div>
-                                        </div>
+                                    <div class="desc">
+                                        <div class="comment" th:utext="${celebration.comment}">Comment</div>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-end">
+                                    <div class="d-flex align-items-center">
+                                        <h5>
+                                            <p class="date" th:text="${celebration.name}">UserName</p>
+                                        </h5>
+                                        <p class="date" th:text=" ${#temporals.format(celebration.modifiedDate, 'yyyy.MM.dd HH:mm:ss')}">December 4, 2017 at 3:12 pm </p>
                                     </div>
                                 </div>
                             </div>
@@ -121,7 +126,8 @@
 
 
     <!-- script-->
-    <th:block th:include="/fragments/common-footer :: html-main-footer "></th:block>
+    <th:block th:include="/fragments/common-footer :: html-main-footer"></th:block>
+    <th:block th:include="/fragments/common-footer :: main-preloader-script"></th:block>
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
     <script>
         $(document).ready(function() {
@@ -129,27 +135,21 @@
             $('#summernote').summernote({
                 height: 150,
                 toolbar: [
-                    ['fontname', ['fontname']],
                     ['fontsize', ['fontsize']],
                     ['style', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
                     ['color', ['forecolor', 'color']],
                     ['para', ['ul', 'ol', 'paragraph']],
                     ['height', ['height']]
                 ],
-                fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', '맑은 고딕', '궁서', '굴림', '돋음체', '바탕체'],
                 fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '28', '30', '36', '50', '72']
             });
         });
     </script>
     <script>
         function dataSend() {
-            alert("in");
             var coment = $('#summernote').summernote('code');
             var name = $("#name").val();
             var pass = $("#passkey").val();
-            alert(coment);
-            alert(name);
-            alert(pass);
             $.ajax({
                 type: 'post',
                 url: '/cbt-register',
@@ -159,23 +159,15 @@
                     'name': name
                 },
                 success: function(jdata) {
-                    if (jdata == "") {
-                        return;
-                    }
-                    var encodeData = decodeString(jdata);
-                    var result = JSON.parse(encodeData);
-
-                    var firstList = $("#commentList").children().first();
-                    $("#commentList").prepend(
-                        '<p class="comment">' +
-                        result.comment +
-                        '</p>' +
-                        '<div class="d-flex justify-content-between">' +
-                        '<div class="d-flex align-items-center">' +
-                        '<h5><p>' +
-                        result.userName +
+                    alert("result comment = " + jdata);
+                    $("#commentsList").prepend(
+                        '<div class="user justify-content-between d-flex"><div class="desc"><div class="comment">' +
+                        coment +
+                        '</div></div></div>' +
+                        '<div class="d-flex justify-content-end"><div class="d-flex align-items-center"><h5><p class="date">' +
+                        name +
                         '</p></h5><p class="date">' +
-                        result.createdDate +
+                        jdata +
                         '</p></div></div>');
 
                 }

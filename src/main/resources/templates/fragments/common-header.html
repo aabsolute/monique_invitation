@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" integrity="sha512-CruCP+TD3yXzlvvijET8wV5WxxEh5H8P4cmz0RFbKK6FlZ2sYl3AEsKlLPHbniXKSrDdFewhbmBK5skbdsASbQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <link rel="stylesheet" th:href="@{/css/main/style.css}">
     <link rel="stylesheet" th:href="@{/css/sunshine/story.css}">
+    <link rel="stylesheet" th:href="@{/css/main/custom.css}">
 
     <!--
             <link rel="stylesheet" th:href="@{/css/main/bootstrap.min.css}">
@@ -43,15 +44,10 @@
 
 
     <!-- Preloader Start -->
-    <th:block th:fragment="main-pre-loader">
-        <div id="preloader-active">
-            <div class="preloader d-flex align-items-center justify-content-center">
-                <div class="preloader-inner position-relative">
-                    <div class="preloader-circle"></div>
-                    <div class="preloader-img pere-text">
-                        <img src="assets/img/logo/loder.jpg" alt="">
-                    </div>
-                </div>
+    <th:block th:fragment="html-preloader">
+        <div id="preloader">
+            <div class="preloader pulse">
+                <i class="fas fa-heartbeat"></i>
             </div>
         </div>
     </th:block>
@@ -77,7 +73,7 @@
                                 <div class="main-menu f-right d-none d-lg-block">
                                     <nav>
                                         <ul id="navigation">
-                                            <!-- <li><a th:href="@{/}" th:text="#{label.header.home}">Home</a></li> -->
+                                            <li><a th:href="@{/}" th:text="#{label.header.home}"><i class="fas fa-heartbeat"></i>Home</a></li>
                                             <li><a th:href="@{/our-story}" th:text="#{label.header.ourstory}">Ourstory</a></li>
                                             <li><a th:href="@{/gallery}" th:text="#{label.header.gallery}">Gallery</a></li>
                                             <li><a th:href="@{/blog}" th:text="#{label.header.blog}">blog</a></li>

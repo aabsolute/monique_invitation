@@ -90,7 +90,7 @@ public class AdminController {
 
         galleryService.postGalleryInfo(galleryDTO);
 
-        return "redirect:admin/main";
+        return "redirect:main";
     }
 
 }

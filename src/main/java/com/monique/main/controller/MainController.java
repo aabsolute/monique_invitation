@@ -1,16 +1,11 @@
 package com.monique.main.controller;
 
 import com.google.gson.Gson;
-import com.monique.common.enums.LangType;
-import com.monique.common.enums.RoleType;
 import com.monique.domain.Celebration;
-import com.monique.domain.Gallery;
 import com.monique.main.dto.CelebrationDTO;
-import com.monique.main.dto.UserSession;
 import com.monique.main.service.CelebrationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.catalina.startup.UserConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
@@ -19,15 +14,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.LocaleResolver;
-import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.net.URLEncoder;
 import java.time.LocalDateTime;
-import java.util.Locale;
+import java.time.format.DateTimeFormatter;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -80,8 +72,7 @@ public class MainController {
         else
             new Exception();
 
-        String jsonString = gson.toJson(cbtDTO);
-        return jsonString;
+        return LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss"));
     }
 
 

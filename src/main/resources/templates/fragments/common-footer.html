@@ -10,9 +10,6 @@
 
 <body>
 
-
-
-
     <th:block th:fragment="html-main-footer">
         <!-- Scroll Up -->
         <div id="back-top">
@@ -37,8 +34,6 @@
         <script th:src="@{/js/main/plugins.js} "></script>
         <script th:src="@{/js/main/main.js} "></script>
 
-
-
         <!-- Scroll Up 
         <div id="back-top">
             <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
@@ -62,10 +57,18 @@
         <script th:src="@{/js/main/jquery.ajaxchimp.min.js}"></script>
         <script th:src="@{/js/main/plugins.js}"></script>
         <script th:src="@{/js/main/main.js}"></script>
-
-
-        
 -->
+    </th:block>
+    <th:block th:fragment="main-preloader-script">
+        <script>
+            $(window).on('load', function() {
+                $('.preloader').delay(550).fadeOut(300);
+                $('#preloader').delay(550).fadeOut(300);
+                $('body').delay(450).css({
+                    'overflow': 'visible'
+                });
+            });
+        </script>
     </th:block>
 
 
