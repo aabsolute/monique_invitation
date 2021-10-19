@@ -19,7 +19,7 @@ public class Gallery extends BaseTimeEntity {
     @Column(name="gallery_id", updatable = false)
     private int id;
 
-    @Column(length = 64, nullable = false)
+    @Column(length = 128, nullable = false)
     private String fileName;
 
     @Column(length = 256, nullable = false)

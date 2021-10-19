@@ -1,4 +1,5 @@
 package com.monique.admin.controller;
+
 import com.monique.common.utils.FileUtils;
 import com.monique.domain.Gallery;
 import com.monique.domain.User;
@@ -33,33 +34,33 @@ public class AdminController {
     private String imgDir;
 
     @GetMapping("main")
-    public String getDashBoardmain(){
+    public String getDashBoardmain() {
 
         return "admin/dashboard";
     }
 
     @GetMapping("user-manager")
-    public String getAllUserManager(Model model, @RequestParam(value = "page", defaultValue = "0") int page){
+    public String getAllUserManager(Model model, @RequestParam(value = "page", defaultValue = "0") int page) {
 
         Page<User> userList = userService.getAllUserWithPaging(page);
 
-        model.addAttribute("paging", userList );
+        model.addAttribute("paging", userList);
 
         return "admin/user/user-list";
     }
 
     @GetMapping("gallery-manager")
-    public String getAllGalleryManager(Model model, @RequestParam(value = "page", defaultValue = "0") int page){
+    public String getAllGalleryManager(Model model, @RequestParam(value = "page", defaultValue = "0") int page) {
 
         Page<Gallery> galleryList = galleryService.getAllGalleryWithPaging(page);
 
-        model.addAttribute("paging", galleryList );
+        model.addAttribute("paging", galleryList);
 
         return "admin/gallery/gallery-list";
     }
 
     @GetMapping("gallery-upload")
-    public String getGalleryUpdate(Model model){
+    public String getGalleryUpdate(Model model) {
 
         return "admin/gallery/gallery-upload";
     }
@@ -67,9 +68,7 @@ public class AdminController {
     @PostMapping("gallery-upload")
     public String postGalleryUpdate(Model model, GalleryDTO galleryDTO, MultipartFile file, HttpServletRequest req) throws Exception {
 
-        //String uploadPath = req.getSession().getServletContext().getRealPath("/").concat("resources");
-
-        String imgUploadPath = imgDir + File.separator + "imgUpload";
+        String imgUploadPath = imgDir + "image";
         String ymdPath = FileUtils.calcPath(imgUploadPath);
         String fileName = null;
 
@@ -78,15 +77,16 @@ public class AdminController {
 
             galleryDTO.setFileName(fileName);
             galleryDTO.setOrigFileName(file.getOriginalFilename());
-            galleryDTO.setGalleryImg(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+            galleryDTO.setGalleryImg("image" + ymdPath + File.separator + fileName);
             galleryDTO.setThumbImg(
-                    File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
+                    File.separator + "image" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
         } else {
             fileName = File.separator + "images" + File.separator + "none.png";
 
             galleryDTO.setGalleryImg(fileName);
             galleryDTO.setThumbImg(fileName);
         }
+
 
         galleryService.postGalleryInfo(galleryDTO);
 

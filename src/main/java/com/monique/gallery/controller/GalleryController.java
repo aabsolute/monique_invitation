@@ -24,7 +24,7 @@ public class GalleryController {
 
         model.addAttribute("paging", galleryList );
 
-        return "gallery/gallery-show.html";
+        return "gallery/gallery";
     }
 
 }

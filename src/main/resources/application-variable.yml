@@ -4,4 +4,5 @@ wedding:
 cookie:
   expired-day: 7
 files:
-  directory: 'C:\upload'
+  directory: 'C:\upload\'
+  resource-directory: 'file:\\\c:\Upload\'

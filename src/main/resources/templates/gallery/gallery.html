@@ -21,48 +21,13 @@
         <p class="page-description text-center">Fluid Layout With Overlay Effect</p>
 
         <div class="tz-gallery">
-            <th:block th:with="imgdir = ${@environment.getProperty('files.directory')}">
-                <div class="row" th:each="gallery: ${paging}">
-
-                    <div class="col-sm-12 col-md-4">
-                        <a class="lightbox" th:href="@{}">
-                            <img th:src="@{}" alt="Bridge">
-                        </a>
-                    </div>
-
-                    <div class="col-sm-12 col-md-4">
-                        <a class="lightbox" href="../images/bridge.jpg">
-                            <img src="../images/bridge.jpg" alt="Bridge">
-                        </a>
-                    </div>
-                    <div class="col-sm-6 col-md-4">
-                        <a class="lightbox" href="../images/park.jpg">
-                            <img src="../images/park.jpg" alt="Park">
-                        </a>
-                    </div>
-                    <div class="col-sm-6 col-md-4">
-                        <a class="lightbox" href="../images/tunnel.jpg">
-                            <img src="../images/tunnel.jpg" alt="Tunnel">
-                        </a>
-                    </div>
-                    <div class="col-sm-12 col-md-8">
-                        <a class="lightbox" href="../images/traffic.jpg">
-                            <img src="../images/traffic.jpg" alt="Traffic">
-                        </a>
-                    </div>
-                    <div class="col-sm-6 col-md-4">
-                        <a class="lightbox" href="../images/coast.jpg">
-                            <img src="../images/coast.jpg" alt="Coast">
-                        </a>
-                    </div>
-                    <div class="col-sm-6 col-md-4">
-                        <a class="lightbox" href="../images/rails.jpg">
-                            <img src="../images/rails.jpg" alt="Rails">
-                        </a>
-                    </div>
-
+            <div class="row" th:each="gallery: ${paging}">
+                <div class="col-sm-12 col-md-4">
+                    <a class="lightbox" th:href="@{/image/} + ${gallery.galleryImg}">
+                        <img th:src="@{/image} + ${gallery.thumbImg}" />
+                    </a>
                 </div>
-            </th:block>
+            </div>
         </div>
 
     </div>

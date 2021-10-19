@@ -30,10 +30,11 @@
                                         <tbody>
                                             <tr th:each="gallery: ${paging}">
                                                 <td th:text="${gallery.id}"></td>
-                                                <th:block th:with="imgdir = ${@environment.getProperty('files.directory')}">
-                                                    <td colspan="3">
-                                                        <img th:src="@{${imgdir} + ${gallery.thumbImg}}" class="img-thumbnail" /></td>
-                                                </th:block>
+                                                <!-- <th:block th:with="imgdir = ${@environment.getProperty('files.directory')}"> -->
+                                                <td colspan="3">
+                                                    <!-- <img th:src="@{|/image,${gallery.thumbImg}|}" class="img-thumbnail" /></td> -->
+                                                    <img th:src="@{/image} + ${gallery.thumbImg}" class="img-thumbnail" /></td>
+                                                <!-- </th:block> -->
                                                 <td th:text="${gallery.fileName}"></td>
                                                 <td th:text="${gallery.likes}"></td>
                                                 <td>

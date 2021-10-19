@@ -16,15 +16,6 @@ public class FileUtils {
     static final int THUMB_WIDTH = 200;
     static final int THUMB_HEIGHT = 200;
 
-//    public static String savePath;
-//
-//    @Value("${files.directory}")
-//    public void setKey(String path) {
-//        savePath = path;
-//    }
-
-
-
     public static String fileUpload(String savePath, String fileName, byte[] fileData, String ymdPath)
             throws Exception {
 
@@ -51,12 +42,11 @@ public class FileUtils {
 
     public static String calcPath(String uploadPath) {
         Calendar cal = Calendar.getInstance();
-        String yearPath = File.separator + cal.get(Calendar.YEAR);
-        String monthPath = yearPath + File.separator + new DecimalFormat("00").format(cal.get(Calendar.MONTH) + 1);
+        String monthPath = File.separator + new DecimalFormat("00").format(cal.get(Calendar.MONTH) + 1);
         String datePath = monthPath + File.separator + new DecimalFormat("00").format(cal.get(Calendar.DATE));
 
-        makeDir(uploadPath, yearPath, monthPath, datePath);
-        makeDir(uploadPath, yearPath, monthPath, datePath + "\\s");
+        makeDir(uploadPath, monthPath, datePath);
+        makeDir(uploadPath,  monthPath, datePath + "\\s");
 
         return datePath;
     }
