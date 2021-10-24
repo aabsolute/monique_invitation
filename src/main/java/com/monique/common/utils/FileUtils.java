@@ -13,8 +13,8 @@ import java.util.UUID;
 @Component
 public class FileUtils {
 
-    static final int THUMB_WIDTH = 200;
-    static final int THUMB_HEIGHT = 200;
+    static final int THUMB_WIDTH = 300;
+    static final int THUMB_HEIGHT = 300;
 
     public static String fileUpload(String savePath, String fileName, byte[] fileData, String ymdPath)
             throws Exception {

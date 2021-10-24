@@ -4,9 +4,7 @@
 <head>
     <!-- script-->
     <th:block th:include="/fragments/common-header :: html-main-header"></th:block>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.css">
-    <link rel="stylesheet" th:href="@{/css/gallery/fluid-gallery.css}">
+    <link rel="stylesheet" th:href="@{/css/gallery/gallery.css}">
 </head>
 
 <body>
@@ -14,30 +12,90 @@
     <th:block th:include="/fragments/common-header :: slim-image-slider('label.header.ourstory')"></th:block>
 
 
-    <div class="container gallery-container">
-
-        <h1>Bootstrap 3 Gallery</h1>
-
-        <p class="page-description text-center">Fluid Layout With Overlay Effect</p>
-
-        <div class="tz-gallery">
-            <div class="row" th:each="gallery: ${paging}">
-                <div class="col-sm-12 col-md-4">
-                    <a class="lightbox" th:href="@{/image/} + ${gallery.galleryImg}">
-                        <img th:src="@{/image} + ${gallery.thumbImg}" />
+    <div id="top"></div>
+    <section class="gallerys">
+        <div class="rows">
+            <ul>
+                <a href="#" class="close"></a>
+                <th:block th:each="gallery, numstat : ${paging}">
+                    <li>
+                        <a th:href="|#@{item}${numstat.index}|">
+                            <img th:src="@{/image} + ${gallery.thumbImg}">
+                        </a>
+                    </li>
+                </th:block>
+            </ul>
+        </div>
+        <!-- / row -->
+        <!-- Item 01 -->
+        <th:block th:each="gallery, numstat : ${paging}">
+            <div th:id="|item${numstat.index}|" class="portfolios">
+                <div class="rows">
+                    <div class="description">
+                        <p th:text="${gallery.imgDescription}">description</p>
+                        <button th:id="${gallery.id}" class="btn btn-block btn-primary" onclick="likeOption(this)"><i class="fa fa-thumbs-up"></i>Like</button>
+                    </div>
+                    <a th:href="@{/image} + ${gallery.galleryImg}" data-toggle="lightbox">
+                        <img src="@{/image} + ${gallery.galleryImg}" class="img-fluid">
                     </a>
                 </div>
             </div>
-        </div>
 
-    </div>
+            </div>
+        </th:block>
+        <!-- / row -->
+    </section>
+
 
 
     <!-- script-->
     <th:block th:include="/fragments/common-footer :: html-main-footer"></th:block>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
     <script>
-        baguetteBox.run('.tz-gallery');
+        // portfolios
+        $('.gallerys ul li a').click(function() {
+            var itemID = $(this).attr('href');
+            alert(itemID);
+            $('.gallerys ul').addClass('item_open');
+            $(itemID).addClass('item_open');
+            return false;
+        });
+        $('.close').click(function() {
+            $('.portfolios, .gallerys ul').removeClass('item_open');
+            return false;
+        });
+
+        $(".gallerys ul li a").click(function() {
+            $('html, body').animate({
+                scrollTop: parseInt($("#top").offset().top)
+            }, 400);
+        });
+
+        function likeOption(id) {
+            var galleryId = $(this).attr('id');
+            $.ajax({
+                type: 'post',
+                url: '/gallery-like',
+                data: {
+                    'galleryId': galleryId,
+                    'like': galleryId
+                },
+                success: function() {
+                    alert("result comment = " + jdata);
+                    $("#commentsList").prepend(
+                        '<div class="user justify-content-between d-flex"><div class="desc"><div class="comment">' +
+                        coment +
+                        '</div></div></div>' +
+                        '<div class="d-flex justify-content-end"><div class="d-flex align-items-center"><h5><p class="date">' +
+                        name +
+                        '</p></h5><p class="date">' +
+                        jdata +
+                        '</p></div></div>');
+
+                }
+            });
+        }
+    </script>
+    <script>
     </script>
 </body>
 

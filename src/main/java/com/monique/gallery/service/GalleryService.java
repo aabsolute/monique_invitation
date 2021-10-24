@@ -51,4 +51,14 @@ public class GalleryService {
         galleryRepo.save(Gallery.builder(galleryDTO).build());
     }
 
+    //4
+    @Transactional
+    public void updateGallerylike(int id, int like)
+    {
+        Gallery result = galleryRepo.findById(id).orElseThrow();
+        result.updateLike(like);
+        galleryRepo.save(result);
+    }
+
+
 }

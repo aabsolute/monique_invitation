@@ -77,7 +77,7 @@ public class AdminController {
 
             galleryDTO.setFileName(fileName);
             galleryDTO.setOrigFileName(file.getOriginalFilename());
-            galleryDTO.setGalleryImg("image" + ymdPath + File.separator + fileName);
+            galleryDTO.setGalleryImg(File.separator +"image" + ymdPath + File.separator + fileName);
             galleryDTO.setThumbImg(
                     File.separator + "image" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
         } else {

@@ -56,6 +56,12 @@ public class Gallery extends BaseTimeEntity {
                 .imgDescription(gallery.getImgDescription());
     }
 
+    public void updateLike(int like)
+    {
+        this.likes += like;
+    }
+
+
     @PrePersist
     public void prePersist(){
         this.likes=0;
